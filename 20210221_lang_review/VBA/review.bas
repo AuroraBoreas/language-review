@@ -36,7 +36,9 @@ Public Sub Main()
     ' container
     Call ContainerDemo
     ' fileIO
-    Call FileIODemo    '
+    Call FileIODemo
+    ' regexp
+    call StringPatternMatch   '
 
 End Sub
 
@@ -334,3 +336,11 @@ private sub TypeDemo()
     debug.print MyRecord.id
 
 end sub
+
+Private Sub StringPatternMatch()
+    ' regexp
+    Dim DataFormat$: DataFormat = "yyyy-mm-dd"
+    Dim Pattern$: Pattern = "[\/]"
+    
+    Debug.Print DataFormat Like Pattern
+End Sub

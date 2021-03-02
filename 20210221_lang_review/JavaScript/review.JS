@@ -1,17 +1,71 @@
-// variable
+/*
 
-// funtion
+JS meta-language review
 
-// statement
+[JS meta]
+----
 
-// control flow
+----
 
-// loop
+*/ 
 
-// class
+function VariableDmo() {
+    /*
+    
+    [Variables]
+    ----
+    * declaration and definition
+        ** pattern: T N V
+        ** default value? "undefined"
 
-// container
+    * keywords
+        ** var
+        ** let
+        ** const
 
-// DOM
+    * data types
+        ** Undefined
+        ** Null
+        ** String
+        ** Number
+        ** Integer
+        ** Decimal
+    
+    * type conversion
+        ** Boolean()
+        ** Number()
+        ** String()
 
-// import
+        ** Number.parseFloat()
+        ** Number.parseInt()
+
+    * reflection
+        ** IsNaN()
+        ** Typeof
+    ----
+    
+    */ 
+    
+}
+
+function Main() {
+    
+    // variable
+    VariableDmo()
+    // funtion
+    
+    // statement
+    
+    // control flow
+    
+    // loop
+    
+    // class
+    
+    // container
+    
+    // DOM
+    
+    // import
+
+}
