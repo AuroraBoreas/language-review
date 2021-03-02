@@ -491,6 +491,7 @@ namespace CSharpReview
             };
 
             System.Console.WriteLine(people.length);
+            System.Console.WriteLine(people[^1]);
 
             // List; flexible capacity
             List<SportsCar> spcars = new List<SportsCar> {
