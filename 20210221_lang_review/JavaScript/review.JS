@@ -9,63 +9,25 @@ JS meta-language review
 
 */ 
 
-function VariableDmo() {
-    /*
-    
-    [Variables]
-    ----
-    * declaration and definition
-        ** pattern: T N V
-        ** default value? "undefined"
-
-    * keywords
-        ** var
-        ** let
-        ** const
-
-    * data types
-        ** Undefined
-        ** Null
-        ** String
-        ** Number
-        ** Integer
-        ** Decimal
-    
-    * type conversion
-        ** Boolean()
-        ** Number()
-        ** String()
-
-        ** Number.parseFloat()
-        ** Number.parseInt()
-
-    * reflection
-        ** IsNaN()
-        ** Typeof
-    ----
-    
-    */ 
-    
-}
+let lib = require('./functions.JS');
 
 function Main() {
     
     // variable
-    VariableDmo()
+    lib.VariableDmo()
     // funtion
-    
+    lib.FunctionDemo()
     // statement
-    
+    lib.StatementDemo()
     // control flow
-    
+    lib.ControlflowDemo()
     // loop
-    
+    lib.LoopDemo()
     // class
-    
+    lib.ClassDemo()
     // container
-    
+    lib.ContainerDemo()
+
     // DOM
-    
-    // import
 
 }

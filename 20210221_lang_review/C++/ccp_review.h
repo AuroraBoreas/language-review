@@ -504,6 +504,8 @@ namespace ZLSpace
                 - "delete" kw
                 - "override" kw
                 - "final" kw
+                - "virtual" kw
+                - "=0"
 
         */ 
 

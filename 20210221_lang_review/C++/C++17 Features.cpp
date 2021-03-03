@@ -18,6 +18,12 @@ auto add(T x, T y) -> T
     return x + y;
 }
 
+template<typename T, typename ...>
+auto addCpp(T& arg1, ...& args) -> T
+{
+    return addCpp(T, ...args);
+}
+
 int main()
 {
     // #1 digit separator literal
@@ -63,6 +69,12 @@ int main()
         delete ptr;
         return val;
     };
+
+    // #13 variadic template
+    
+    // #14 unpack
+    auto p = std::make_pair<int, std::string>(69, "hello world");
+    auto [x3, y1] = p; 
 
     return 0;
 }
