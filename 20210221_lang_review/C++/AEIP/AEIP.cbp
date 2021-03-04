@@ -32,7 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="date.cpp" />
+		<Unit filename="date.h" />
+		<Unit filename="datetime.cpp" />
+		<Unit filename="datetime.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="time.cpp" />
+		<Unit filename="time.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

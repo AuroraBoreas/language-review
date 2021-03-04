@@ -26,7 +26,9 @@ int main()
     int x1 = 3, x2 = 4;
     std::cout << add(x1, x2) << std::endl;
 
+    {
 
+    }
 
     return 0;
 }
