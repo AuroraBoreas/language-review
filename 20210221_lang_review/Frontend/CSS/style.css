@@ -1,0 +1,13 @@
+header {
+    background: rgba(0, 0, 0, 1);
+    color: white;
+    padding: 10px;
+    font-size: x-large;
+
+}
+
+body {
+    background: rgb(248, 248, 173);
+    font-family: sans-serif;
+    margin: 10px 5%;
+}
