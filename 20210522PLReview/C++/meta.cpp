@@ -1042,7 +1042,10 @@ void algorithmDemo(void)
             & uninitialized_default_construct_n
             & uninitialized_value_construct_n
             & destory_n
-            
+    
+    $ now what?
+        - when using for-loops, wait a second and think
+        - replace for-loops by the right algorithms
     ===
     */
 
