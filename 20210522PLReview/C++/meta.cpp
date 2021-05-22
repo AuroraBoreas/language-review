@@ -993,17 +993,59 @@ void algorithmDemo(void)
             $ std::unique
             $ collection.erase
 
-        * _copy
-            % remove_copy
-            % unique_copy
-            % reverse_copy
-            % rotate_copy
-            % relpace_copy
-            % partition_copy
-            % partial_sort_copy
+            * _copy
+                % remove_copy
+                % unique_copy
+                % reverse_copy
+                % rotate_copy
+                % relpace_copy
+                % partition_copy
+                % partial_sort_copy
 
+            * _if
+                & find_if
+                & find_if_not
+                & count_if
+                & remove_if
+                & remove_copy_if
+                & replace_if
+                & replace_copy_if
+                & copy_if
 
- 
+        * for_each and transform
+            - std::transform
+            - std::for_each
+
+        * row memory
+            ~ fill -> operator=
+            ~ copy -> operator=
+            ~ move -> operator=
+            
+            vs
+            @ uninitialized_fill -> ctor
+            @ uninitialized_copy -> copy ctor
+            @ uninitialized_move -> move ctor
+
+            vs
+            # std::destory
+            # uninitialized_default_construct
+            # uninitialized_value_construct
+
+        * _N
+            & copy_n
+            & fill_n
+            & generate_n
+            & search_n
+            & for_each_n
+            & uninitialized_copy_n
+            & uninitialized_move_n
+            & uninitialized_default_construct_n
+            & uninitialized_value_construct_n
+            & destory_n
+            
     ===
     */
+
+    AlgorithmNS::heaps();
+    AlgorithmNS::sorts();
 }
