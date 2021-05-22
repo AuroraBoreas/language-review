@@ -13,6 +13,9 @@ C++, meta review
 #include <sstream>
 #include <array>
 #include <list>
+#include <algorithm>
+#include <vector>
+#include <string_view>
 
 void variableDemo(void);
 void functionDemo(void);

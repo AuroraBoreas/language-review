@@ -15,7 +15,7 @@ function variableDemo() {
     x1 = Number(69);
     console.log(`x1 = ${x1}, type: ${typeof x1}`);
 
-    let x2 = Boolean(x1);
+    let x2 = Boolean(x1); 
     console.log(`x2 = ${x2}, type: ${typeof x2}`);
     
     const pi = 3.14;

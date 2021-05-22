@@ -455,6 +455,54 @@ namespace DatastructureNS
 
 namespace AlgorithmNS
 {
+    void print(std::string_view text, std::vector<int> const& v={})
+    {
+        std::cout << text << ": ";
+        for(const auto& e : v) std::cout << e << ' ';
+        std::cout << '\n';
+    }
+
+    // Max Heap
+    void heaps(void)
+    {
+        std::vector<int> v{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        print("initially, v", v);
+
+        std::make_heap(v.begin(), v.end());
+        print("after make_heap, v", v);
+
+        std::pop_heap(v.begin(), v.end());
+        print("after pop_heap, v", v);
+
+        auto top = v.back();
+        v.pop_back();
+        print("formal top element", {top});
+        print("after removing the former top element, v", v);
+
+        // add one element
+        v.push_back(8.88);
+        print("before push_heap, v", v);
+        std::push_heap(v.begin(), v.end());
+        print("after push_heap, v", v);
+
+        // remove one element
+        std::pop_heap(v.begin(), v.end());
+    }
+
+    // sort
+    void sorts(void)
+    {
+        std::vector<int> s{5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
+        print("before partial_sort, s", s);
+        std::partial_sort(s.begin(), s.begin() + 3, s.end());
+        print("after partial_sort, s", s);
+
+    }
+    // partitioning
+    void partition(void)
+    {
+        std::vector<int> v {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    }
     
 } // namespace algorithmNS
 
@@ -467,52 +515,52 @@ void variableDemo(void)
     * pattern: T N P
     * feature:
         * primitive types
-            ! Char
-            ! Short
-            ! Int
-            ! Long
+            @ Char
+            @ Short
+            @ Int
+            @ Long
 
-            ! Float
-            ! Double
+            @ Float
+            @ Double
             
-            ! [x]Byte
-            ! Boolean
-            ! [x]Decimal
+            @ [x]Byte
+            @ Boolean
+            @ [x]Decimal
 
         * type traits
-            ! type
+            @ type
 
         * type conversion
-            ! implicit vs explicit
-            ! downcasting vs upcasting
+            @ implicit vs explicit
+            @ downcasting vs upcasting
               
         * initialization
-            ! resource acquisition is initialization
-            ! narrowing mechnim
+            @ resource acquisition is initialization
+            @ narrowing mechnim
 
         * value
-            ! l-Value
-            ! r-Value
+            @ l-Value
+            @ r-Value
 
         * reference 
-            ! l-Reference
-            ! r-Reference
+            @ l-Reference
+            @ r-Reference
 
         * pointer
-            ! raw Pointer
-            ! array decayed into raw pointer 
-            ! smart pointers
+            @ raw Pointer
+            @ array decayed into raw pointer 
+            @ smart pointers
 
         * variable template
-            ! generalization 
+            @ generalization 
         
         * keywords
-            ! static
-            ! register
-            ! const
-            ! auto
-            ! mutable
-            ! extern 
+            @ static
+            @ register
+            @ const
+            @ auto
+            @ mutable
+            @ extern 
     ===
     */ 
 
@@ -547,40 +595,40 @@ void functionDemo(void)
     * pattern: T N P
     * feature:
         * return_type
-            ! ByVal
-            ! ByRef
-            ! ByPtr
+            @ ByVal
+            @ ByRef
+            @ ByPtr
 
         * func_name
-            ! overload
-            ! operator overload
-            ! function template
+            @ overload
+            @ operator overload
+            @ function template
 
         * args
-            ! ByVal
-            ! ByRef
-            ! ByPtr
-            ! [x] variadic args or params
+            @ ByVal
+            @ ByRef
+            @ ByPtr
+            @ [x] variadic args or params
         
         * category
-            ! regular: prototype, definition
-            ! [x]anonymous
-            ! lambda
-            ! immediate
+            @ regular: prototype, definition
+            @ [x]anonymous
+            @ lambda
+            @ immediate
 
-            ! function pointer
+            @ function pointer
 
-            ! [x]decorator
-            ! [x]generator
-            ! [x]function inside function
-            ! [x]class inside function
+            @ [x]decorator
+            @ [x]generator
+            @ [x]function inside function
+            @ [x]class inside function
         
         * keywords
-            ! inline
-            ! #macro
-            ! return
-            ! constexpr
-            ! noexcept
+            @ inline
+            @ #macro
+            @ return
+            @ constexpr
+            @ noexcept
 
     ===
     */ 
@@ -626,57 +674,57 @@ void statementDemo(void)
     * pattern: symbol
     * feature:
         * Arithmetic
-            ! +,-,*,/,%
-            ! ++(post), --(post), ++(pre), --(pre), 
+            @ +,-,*,/,%
+            @ ++(post), --(post), ++(pre), --(pre), 
 
         * Relational
-            ! ==, !=
-            ! >, >=
-            ! <, <=
+            @ ==, !=
+            @ >, >=
+            @ <, <=
 
         * Logic
-            ! !
-            ! &&
-            ! ||
+            @ !
+            @ &&
+            @ ||
 
         * Access
-            ! ->
-            ! (*).
+            @ ->
+            @ (*).
 
         * Bitwise
-            ! <<, >>
-            ! |
-            ! &
-            ! ^
-            ! ~
+            @ <<, >>
+            @ |
+            @ &
+            @ ^
+            @ ~
 
         * Assign
-            ! type var_name = val
-            ! type()
-            ! type{}
-            ! var_name()
-            ! var_name{}
+            @ type var_name = val
+            @ type()
+            @ type{}
+            @ var_name()
+            @ var_name{}
 
         * Cast
-            ! dynamic_cast<T*>(U*)
-            ! static_cast<T*>(U*) 
-            ! const_cast<T*>(U*)
-            ! reinterpret_cast<T*>(U*)
-            ! (type)var_name; C-style cast;
+            @ dynamic_cast<T*>(U*)
+            @ static_cast<T*>(U*) 
+            @ const_cast<T*>(U*)
+            @ reinterpret_cast<T*>(U*)
+            @ (type)var_name; C-style cast;
 
         * Op for storage
-            ! new
-            ! delete
+            @ new
+            @ delete
 
         * Op for other
-            ! .
-            ! ()
-            ! []
-            ! {} 
-            ! <>
-            ! :?
-            ! ,
-            ! ;
+            @ .
+            @ ()
+            @ []
+            @ {} 
+            @ <>
+            @ :?
+            @ ,
+            @ ;
     ===
     */ 
 
@@ -741,47 +789,47 @@ void classDemo(void)
     * pattern: sim
     * feature:
         * default components
-            ! ctor
-            ! dtor
-            ! copy ctor
-            ! copy assignment operator
+            @ ctor
+            @ dtor
+            @ copy ctor
+            @ copy assignment operator
         
         * pillars
             * Abstract
-                ! Entity Relationship
-                ! Property (has-a)
-                ! class vs object (is-a)
-                ! = 0
+                @ Entity Relationship
+                @ Property (has-a)
+                @ class vs object (is-a)
+                @ = 0
 
             * Encapsulation
-                ! private
-                ! public
-                ! friend
+                @ private
+                @ public
+                @ friend
 
             * Inheritance
-                ! virtual 
-                ! explicit
-                ! default
+                @ virtual 
+                @ explicit
+                @ default
 
             * Polymorphism
-                ! override
+                @ override
             
         * class vs struct
             * small vs large
             * simple vs complicated
             * privilage
-                ! class is private by default
-                ! struct is public by default
+                @ class is private by default
+                @ struct is public by default
 
         * [x]interface
         
     * principle
-        ! SRP
-        ! OCP
-        ! LSP
-        ! ISP
-        ! DIP
-        ! Delimiter principle(the least known principle)
+        @ SRP
+        @ OCP
+        @ LSP
+        @ ISP
+        @ DIP
+        @ Delimiter principle(the least known principle)
 
     ===
 
@@ -806,21 +854,21 @@ void datastructureDemo(void)
     * pattern: container
     * feature:
         * seq
-            ! array
-            ! list
-            ! forward_list
-            ! dequeue
+            @ array
+            @ list
+            @ forward_list
+            @ dequeue
 
         * adapter
-            ! queue
-            ! priority_queue
-            ! stack 
+            @ queue
+            @ priority_queue
+            @ stack 
 
         * associative
-            ! map
-            ! multimap
-            ! set
-            ! multiset 
+            @ map
+            @ multimap
+            @ set
+            @ multiset 
     ===
     */ 
 
@@ -842,6 +890,120 @@ void algorithmDemo(void)
         * list observation
         * bucket
         * hash policy
+    
+    * 195 STL_Algorithms grouped by logical relationship
+        * permutations
+            * heap
+                @ make_heap
+                @ push_heap
+                @ pop_heap
+                
+            * sorting
+                @ sort
+                @ sort_heap
+                @ partial_sort
+                @ nth_element
+                @ inplace_merge
+
+            * partitioning
+                @ partition
+                @ partition_point
+            
+            * other
+                @ reverse
+                @ rotate
+                @ shuffle
+                @ random_shuffle
+                @ prev_permutation
+                @ next_permutation
+
+        * partitioning_sort_heap
+            # stable_*
+            # is_*
+            # is_*_until
+            # *_copy
+            # *_n
+            # *_if
+
+        * queries
+            * numeric algorithm 
+                @ count
+                @ accumulate / (transform_)reduce
+                @ partial_sum
+                @ (transform_)inclusive_scan
+                @ (transform_)exclusive_scan
+                @ inner_product
+                @ adjacent_difference
+                @ sample
+
+            * querying Property
+                @ all_of
+                @ any_of
+                @ none_of 
+            
+            * querying a property on 2 ranges
+                @ equal
+                @ lexicographic_compare
+                @ mismatch
+                @ is_permutation
+
+            * search a value
+                ^ not sorted 
+                    @ find
+                    @ adjacent_found
+                ^ sorted
+                    @ equal_range 
+                    @ lower_bound
+                    @ upper_bound
+                    @ binary_search -> bool
+            
+            * search a range
+                @ search
+                @ find_end
+                @ find_first_of 
+            
+            * search a relative value
+                @ max_element
+                @ min_element
+                @ minmax_element
+
+        * algos on sets
+            @ set_difference (A-B)
+            @ set_intersection (A⋂B)
+            @ set_union (A⋃B)
+            @ set_symmetric_difference (A⊖B)
+            @ std::includes (A⊆B, A⊂B)
+            @ std::merge (?)
+
+        * movers
+            @ std::copy(first, last, out);
+            @ std::move(first, last, out);
+            @ std::swap_ranges(first, last, out);
+            @ std::copy_backward
+            @ std::move_backward
+
+        * value modifiers
+            @ std::fill    
+            @ std::generate
+            @ std::iota
+            @ std::replace
+
+        * structure changers
+            $ std::remove
+            $ std::unique
+            $ collection.erase
+
+        * _copy
+            % remove_copy
+            % unique_copy
+            % reverse_copy
+            % rotate_copy
+            % relpace_copy
+            % partition_copy
+            % partial_sort_copy
+
+
+ 
     ===
     */
 }
