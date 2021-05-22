@@ -29,7 +29,7 @@ function main() {
     lib.classDemo();
     
     console.log("\n=== datastructure ===");
-    lib.datastructure();
+    lib.datastructureDemo();
     
     console.log("\n=== algorithmDemo ===");
     lib.algorithmDemo();
