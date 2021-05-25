@@ -17,3 +17,8 @@ if __name__ == "__main__":
     p1: Polynomial = Polynomial(1, 2, 3)
     p2: Polynomial = Polynomial(1, 2, 3)
     print(p1 + p2)
+
+    a = 0b11
+    b = 0o11
+    c = 0x11
+    print(a, b, c)

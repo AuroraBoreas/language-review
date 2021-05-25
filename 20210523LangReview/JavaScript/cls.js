@@ -29,7 +29,7 @@ class Point {
     Compare(other) {
         return this.ToString() == other.ToString();
     }
-};
+}
 
 class Line
 {
