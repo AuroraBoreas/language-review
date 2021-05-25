@@ -9,7 +9,7 @@ swift, meta review
 import UIKit
 import cocoa
 
-import TS
+let lib = TS
 
 func MetaReview() {
     

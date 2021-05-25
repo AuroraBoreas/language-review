@@ -103,6 +103,19 @@ enum TS {
         let y3: String = y2 ?? "Hoho"
         print(y3)
 
+        let msg = """
+        Id est sint irure dolor esse exercitation elit.
+        Do deserunt cupidatat aliqua incididunt ex mollit laborum aliqua veniam.
+        Irure amet aute ullamco id exercitation veniam aute.
+        """
+        print(msg)
+
+        let raw = #"hello \(name)"#
+        print(raw)
+
+        let calc = #"hello \#(33 + 44)"#
+        print(calc)
+
     }
 
     public static void functionDemo() 
@@ -264,6 +277,7 @@ enum TS {
         @ lambda or closure
         { (arglable parameter: T) -> U in
             // statement;
+            return
         }
         */
         let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
@@ -318,10 +332,77 @@ enum TS {
         print()
 
         /* 
-        @ escape closure
+        @ escape closure; yeah, it is similar with `delegate, event` EventHandler concept in C#
         $ passing a closure -> a function
         $ the closure executed after function's return
         */
+
+        var completionHandlers: [() -> Void] = []
+        func someFunctionWithEscapingClosure(completionHandlers: @escaping () -> Void) {
+            completionHandlers.append(completionHandlers)
+        }
+
+        func someFunctionWithNonEscapingClosure(closure: () -> Void) {
+            closure()
+        }
+
+        class A {
+            var x = 10
+            func doSomething() {
+                // ! when using `@escape` closure, u MUST use `self` explicitly
+                someFunctionWithEscapingClosure { self.x = 100 }
+                // u may use `self` implicitly with NonEscaping closure
+                someFunctionWithNonEscapingClosure { x = 200 }
+            }
+        }
+
+        let a: A = A()
+        a.doSomething()
+        print(a.x)
+
+        completionHandlers.first?()
+        print(a.x)
+
+        // @ using autoclosure; it does not acception any args
+        var wives: Array[String] = [
+            "TS",
+            "SCY",
+            "WL",
+            "LL"
+            "XY"
+        ]
+        print(wives.count) // 5
+
+        let wifeProvider: () -> String = { wives.remove(at: 9) }
+        print(wives.count) // 5
+        
+        print("now have sex with \(wifeProvider())!")
+        print(wives.count) // 4
+
+        // @ explicit closure as args;
+        func sexWith(wife wifeProvider: () -> String) {
+            print("Now sexing with \(wifeProvider())!")
+        }
+        sexWith(wife: { wives.remove(at: 0) })
+
+        // @ autoclosure as args
+        func sexWith(wife wifeProvider: @autoclosure () -> String) {
+            print("Now sexing with \(wifeProvider())!")
+        }
+        sexWith(wife: wives.remove(at: 0))
+
+        // # using @autoclosure, @escaping at the same time
+        var wifeProviders: [()->String] = []
+        func collectWifeProviders(_ wifeProvider: @autoclosure @escaping ()->String) {
+            wifeProviders.append(wifeProvider)
+        }
+        collectWifeProviders(wives.remove(at: 0))
+        collectWifeProviders(wives.remove(at: 0))
+
+        print("collected \(wifeProviders.count) closures")
+        for wifeProvider in wifeProviders {
+            print("Now sexing with \(wifeProvider())!")
+        }
 
     }
 
@@ -450,6 +531,7 @@ enum TS {
             - if...else if...else
             - switch...case...default
             - try...catch...
+            - guard...else
         ===
         
         */ 
@@ -482,6 +564,22 @@ enum TS {
 
         print("setDate(2021, 5, 25)? : \(setDate(2021, 5, 25))")
 
+        // @ using if to check API is available
+        if #available(iOS 10, macOS 10.12, *) {
+            // ... 
+        } else {
+            // ...
+        }
+
+        // @ pattern match
+        let p1 = (9, 0)
+        switch p1 {
+        case (let distance, 0), (0, let distance):
+            print("on an axis, \(distance) from the origin")
+        default:
+            print("Not on an axis")
+        }
+
         func divisionZero(_ x: Int, _ y: Int) throws-> Double {
             return x / y
         }
@@ -491,6 +589,24 @@ enum TS {
         } catch {
             print("error out; in catch clause")
         }
+
+        // @ guard, protect code once condition fails
+        func greet(_ person: [String: String]) {
+            guard let name = person["name"] else {
+                return
+            }
+            print("hello \(name)!")
+
+            guard let location = person["location"] else {
+                print("I hope the weather i nice near you")
+                return
+            }
+
+            print("I hope the weather is nice in \(location)")
+        }
+
+        greet(person: ["name" : "TS"])
+        greet(person: ["name" : "ZL", "location" : "Shanghai"])
     }
 
     public static void LoopDemo() 
@@ -679,6 +795,42 @@ enum TS {
 
         for item in s {
             print(item)
+        }
+
+        // enum
+        enum CompassPoint {
+            case north
+            case south
+            case east
+            case west
+        }
+
+        enum Wife {
+            case "TS", "SCY", "XY"
+        }
+
+        var directionToTS = CompassPoint.west
+        // @ after declared as CompassPoint, it is easy to change value
+        directionToTS = .east
+        // @ combine with `swith`
+        switch directionToTS {
+        case .north:
+            print("Lots of planets have a north")
+        case .south:
+            print("Watch out for penguins")
+        case .east:
+            print("Where the sun rises")
+        case .west:
+            print("Where the skies are blue")
+        }
+        // @ to make `enum` iterable, inherit `CaseIterable` protocol
+        enum Beverage: CaseIterable {
+            case coffee, tea, juice
+        }
+        let numberOfChoices = Beverage.allCases.count
+        print("\(numberOfChoices) beverages available")
+        for beverage in Beverage.allCases {
+            print(beverage)
         }
     }
 
