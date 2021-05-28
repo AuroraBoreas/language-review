@@ -1,9 +1,9 @@
 import enum
 
 class Color(enum.Enum):
-    red = 1
+    red   = 1
     green = 2
-    blue = 3
+    blue  = 3
 
 if __name__ == "__main__":
     r = Color.red

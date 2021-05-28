@@ -43,13 +43,10 @@ namespace FuncNS
 {
     // regular
     constexpr inline int fibonacci(int n)
-    {
-        return n < 2? 1 : fibonacci(n-1) + fibonacci(n-1);
-    }
+    { return n < 2? 1 : fibonacci(n-1) + fibonacci(n-1); }
+
     constexpr int factorial(int n) noexcept
-    {
-        return n < 2? 1 : n * factorial(n-1);
-    }
+    { return n < 2? 1 : n * factorial(n-1); }
 
     // lambda
     const auto lambda = [](int n)->int{
@@ -1115,7 +1112,7 @@ void meta_review::loopDemo(void)
         - for(;;)
         - for(:)
         - while
-        - do...while 
+        - do...while
     ===
     
     */ 

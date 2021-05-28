@@ -115,7 +115,6 @@ enum TS {
 
         let calc = #"hello \#(33 + 44)"#
         print(calc)
-
     }
 
     public static void functionDemo() 
@@ -368,7 +367,7 @@ enum TS {
             "TS",
             "SCY",
             "WL",
-            "LL"
+            "LL",
             "XY"
         ]
         print(wives.count) // 5
@@ -396,6 +395,7 @@ enum TS {
         func collectWifeProviders(_ wifeProvider: @autoclosure @escaping ()->String) {
             wifeProviders.append(wifeProvider)
         }
+
         collectWifeProviders(wives.remove(at: 0))
         collectWifeProviders(wives.remove(at: 0))
 
@@ -590,7 +590,8 @@ enum TS {
             print("error out; in catch clause")
         }
 
-        // @ guard, protect code once condition fails
+        // @ guard, protect the rest of code once condition fails
+        // ! `else` clause MUST have control statement(return/continue/break) to escape
         func greet(_ person: [String: String]) {
             guard let name = person["name"] else {
                 return
@@ -620,7 +621,7 @@ enum TS {
             - for(;;)
             - for(:)
             - while
-            - do...while 
+            - do...while
         ===
         */ 
         
@@ -678,6 +679,8 @@ enum TS {
             - Inheritance
                 $ is-a
                 $ has-a
+                $ multiple inheritance
+                $ MRO
 
             - Polymorphism
 
@@ -717,6 +720,118 @@ enum TS {
         ===
         */ 
 
+        // @ class
+        class Warrior {
+            var name: String
+            var healthpoint: Int
+            var attack: Int
+            var defenece: Int
+            var block: Bool
+
+            init(_ name: String, _ healthpoint: Int,
+                _ attacK: Int, _ defenece: Int,
+                _ block: Bool) {
+                self.name = name
+                self.healthpoint = healthpoint
+                self.attack = attack
+                self.defence = defence
+                self.block = block
+            }
+
+            func Attack(_ otherWarrior: Warrior) {
+
+            }
+        }
+
+        class Battle {
+            func startFight(_ warriorA: Warrior, _ warriorB: Warrior) {
+                fightOn : while true {
+                    switch Battle(warriorA, warriorB) {
+                    case false:
+                        print("Game Over")
+                        break fightOn
+                    case true:
+                        print("Start fight again")
+                        continue
+                    default:
+                        print("nothing")
+                        break fightOn
+                    }
+                }
+            }
+
+            static func Battle() -> Bool {
+                // TODO
+                return true;
+            }
+        }
+
+        protocol Teleport {
+            func teleportResult()
+        }
+
+        class WarriorCanTeleport : Teleport {
+            func teleportResult() -> Void {
+                print("teleport success")
+            }
+        }
+
+        class WarriorCantTeleport : Teleport {
+            func teleportResult() -> Void {
+                print("teleport failed")
+            }
+        }
+
+        class MagicWarrior: Warrior {
+            var teleportChance: Int = 0
+            var teleportStatus: WarriorCanTeleport
+
+            init(_ name: String, _ healthpoint: Int,
+                _ attacK: Int, _ defenece: Int,
+                _ block: Bool, _ teleportChange: Bool) {
+                super.init(name, healthpoint, attack, defence, block)
+                teleportChance = teleportChance
+            }
+        }
+
+        // @ struct
+        // ! in Swift, instances of struct/enum are passing `ByVal` just like C#, C++
+        struct Resoluation {
+            var width:  Int = 0
+            var height: Int = 0
+        }
+
+        class VideoMode {
+            // ^ in real project, using dependency injection instead
+            var resolution: Resoluation = Resoluation()
+            var iterlaced = false
+            var frameRate = 0.0
+            var name: String?
+        }
+
+        // @ property
+        struct Point {
+            var x: Int = 0
+            var y: Int = 0
+        }
+
+        struct Size {
+            var width: Int = 0
+            var Height: Int = 0
+        }
+
+        struct Rect {
+            var origin: Point()
+            var size: Size()
+
+            var center: Point {
+                get {}
+                set(newCenter) {
+                    origin.x = 
+                }
+            }
+        
+        }
     }
 
     public static void datastructureDemo() 
@@ -741,7 +856,7 @@ enum TS {
 
             - associative
                 $ map
-                    $ multimap
+                $ multimap
                 $ set
                 $ multiset
 
@@ -847,6 +962,17 @@ enum TS {
         case .qrCode(let productCode):
             print("QR code: \(productCode).")
         }
+
+        // @ recursive enum; the concept is good; but why take `enum` so far is bothering me
+        // @ `enum` the concept itself just a simple type with E-R diagram(has-a relationship)
+        enum arithmeticCalculation {
+            case number: Int
+            indirect case add: arithmeticCalculation = arithmeticCalculation.number + arithmeticCalculation.number
+            indirect case multiply: arithmeticCalculation = arithmeticCalculation.number * arithmeticCalculation.number
+        }
+
+        // 
+
     }
 
     public static void algorithmDemo() 
@@ -886,5 +1012,7 @@ enum TS {
         ===
         */
 
+        // ^ just like C#, Python, Swift packs algorithm into containers
+        // ^ no need to do it like C++ STL
     }
 }
