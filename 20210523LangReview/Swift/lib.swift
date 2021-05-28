@@ -796,17 +796,25 @@ enum TS {
 
         // @ struct
         // ! in Swift, instances of struct/enum are passing `ByVal` just like C#, C++
-        struct Resoluation {
+        struct Resolution {
             var width:  Int = 0
             var height: Int = 0
         }
 
         class VideoMode {
             // ^ in real project, using dependency injection instead
-            var resolution: Resoluation = Resoluation()
+            var resolution: Resolution = Resolution()
             var iterlaced = false
             var frameRate = 0.0
             var name: String?
+
+            init(_ resolution: Resolution, _ interlaced: Bool = false,
+                _ frameRate: Double = 0.0, _ name: String = "noname") {
+                self.resolution = resolution
+                self.interlaced = interlaced
+                self.frameRate = frameRate
+                self.name = name
+            }
         }
 
         // @ property
@@ -824,13 +832,81 @@ enum TS {
             var origin: Point()
             var size: Size()
 
+            // @ getter and setter share the same concept in C#
             var center: Point {
-                get {}
+                get {
+                    let centerX = origin.x + (size.width / 2)
+                    let centerY = origin.y + (size.height / 2)
+                    return Point(x: centerX, y: centerY)
+                }
+                // @ just like C#
                 set(newCenter) {
-                    origin.x = 
+                    origin.x = newCenter.x - (size.width / 2)
+                    origin.y = newCenter.y - (size.height / 2)
                 }
             }
         
+        }
+
+        // @lazy initialization
+        class DataImporter {
+            var fileName = "data.txt"
+        }
+
+        class DataManager {
+            // ^ keyword `lazy` has the same concept as `lazy<T>class` in C#
+            // & https://docs.microsoft.com/en-us/dotnet/api/system.lazy-1?view=net-5.0
+            lazy var importer = DataImporter()
+            var data = [String]()
+        }
+
+        // @ propertyWrapper
+        @propertyWrapper
+        struct TwelveOrLess {
+            private var number : Int
+            
+            init(number) {
+                self.number = number
+            }
+            var wrappedValue: Int {
+                get { return number }
+                set { number = min(newValue, 12) }
+            }
+        }
+
+        let manager = DataManager()
+        manager.data.append("some data")
+        manager.data.append("some more data")
+
+        // @ using the struct TwelveOrLess to wrapper
+        // @ ay, its concept is similar with @property in Python
+        struct SmallRectangle {
+            @TwelveOrLess var height: Int
+            @TwelveOrLess var width: Int
+        }
+
+        class LevelTracker {
+            static var highestUnlockedLevel = 1
+            var currentLevel = 1
+
+            static func unlock(_ level: Int) {
+                if level > highestUnlockedLevel {
+                    highestUnlockedLevel = level
+                }
+            }
+            
+            static func isUnlocked(_ level: Int) -> Bool {
+                return level <= highestUnlockedLevel
+            }
+
+            @discardableResult
+            mutating func advance(to level: Int) -> Bool {
+                if LevelTracker.isUnlocked(level) {
+                    currentLevel =  level
+                    return true
+                }
+                return false
+            }
         }
     }
 
@@ -971,7 +1047,7 @@ enum TS {
             indirect case multiply: arithmeticCalculation = arithmeticCalculation.number * arithmeticCalculation.number
         }
 
-        // 
+        // @
 
     }
 
