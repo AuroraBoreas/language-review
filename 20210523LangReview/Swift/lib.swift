@@ -908,6 +908,35 @@ enum TS {
                 return false
             }
         }
+        // $ struct, enum are vale-type
+        // $ it means regular methods cant mutate instance properties
+        struct Point {
+            var x: Double = 0.0
+            var y: Double = 0.0
+            mutating func moveBy(x deltaX: Double, y deltaY: Double) {
+                // ^ mutating method assigns a new instance to self;
+                self = Point(x: x + deltaX, y: x + deltaY)
+            }
+        }
+        // $ enum
+        enum TripleStateSwitch {
+            case off, low, high
+            mutating func next() {
+                switch self {
+                case .off:
+                    self = .low
+                case .low:
+                    self = .high
+                case .high:
+                    self = .off
+                }
+            }
+        }
+
+        var ovenLight = TripleStateSwitch.low
+        ovenLight.next() // high
+        ovenLight.next() // off
+
     }
 
     public static void datastructureDemo() 
@@ -919,6 +948,7 @@ enum TS {
         * pattern: container
         * feature:
             - seq
+            
                 $ array -> fixed size
                 $ vector
                 $ list
