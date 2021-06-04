@@ -60,6 +60,7 @@ namespace MetaReview
                             % const and variable
                             % const and pointer
                             % const and function
+                            
                         ~ extern
                         ~ register
                         ~ auto
@@ -73,7 +74,81 @@ namespace MetaReview
                     $ parameter means placeholder variable
             ===    
             */ 
+
+            char x0; x0 = 'c';
+            short x1 = 123;
+            int x2 = 69;
+            long x3 = 123456789L;
+
+            float x4 = 2.718281828F;
+            double x5 = 3.14;
+
+            byte x6 = 128;
+            bool x7 = true;
+            decimal x8 = 42.0M;
+
+            System.Console.WriteLine($"x0 = {x0}");
+            System.Console.WriteLine($"x1 = {x1}");
+            System.Console.WriteLine($"x2 = {x2}");
+            System.Console.WriteLine($"x3 = {x3}");
+            System.Console.WriteLine($"x4 = {x4}");
+            System.Console.WriteLine($"x5 = {x5}");
+            System.Console.WriteLine($"x6 = {x6}");
+            System.Console.WriteLine($"x7 = {x7}");
+            System.Console.WriteLine($"x8 = {x8}");
         }
+
+        private static int Fibonacci(int n)
+        {
+            return n < 2 ? 1 : Fibonacci(n-1) + Fibonacci(n-2);
+        }
+
+        private static int Factorial(int n)
+        {
+            return n < 2 ? 1: n * Factorial(n-1);
+        }
+
+        private static void AddOne1(int n)
+        { n++; }
+
+        private static void AddOne2(ref int n)
+        { n++; }
+
+        private static void AddOne3(in int n)
+        { System.Console.WriteLine($"n = {n}"); }
+
+        private static void AddOne4(out int n)
+        { n = 1; }
+
+        private static void ParamsDemo(params int[] arr)
+        {
+            for(int i=0; i<arr.Length; ++i)
+            {
+                System.Console.WriteLine($"{i}, {arr[i]}");
+            }
+        }
+
+        private static int Sum(int x, int y)
+        {
+            return x + y;
+        }
+
+        private static void Hello(string name)
+        {
+            System.Console.WriteLine($"hello {name}");
+        }
+
+        private static void PrintPersonInfo(string name, int age)
+        {
+            System.Console.WriteLine($"{name} is {age}");
+        }
+
+        private static void SayHello(string name, int age)
+        {
+            System.Console.WriteLine($"say hello to {name}, your age is {age}");
+        }
+        
+        public delegate void FuncPtr(string name, int age);
 
         public static void FunctionDemo() 
         {
@@ -91,7 +166,7 @@ namespace MetaReview
                 - function pointer
                 - [x]decorator
                 - [x]generator
-                - [x]function in function
+                - [x]nested function
                 - class in function
 
                 - return_type
@@ -117,6 +192,40 @@ namespace MetaReview
                     $ [[deprecated]]
             ===
             */ 
+            
+            AddOne4(out int x);
+            System.Console.WriteLine($"x = {x}");
+            AddOne3(in x);
+            System.Console.WriteLine($"x = {x}");
+            AddOne2(ref x);
+            AddOne1(x);
+            System.Console.WriteLine($"x = {x}");
+
+            ParamsDemo(1, 2, 3, 4);
+            
+            Func<int, int, int> MyFunc = Sum;
+            System.Console.WriteLine($"Func<T>, {MyFunc(3, 4)}");
+            
+            Action<string> MyHello = Hello;
+            MyHello("TS");
+
+            FuncPtr f1 = PrintPersonInfo;
+            f1("TS", 30);
+
+            FuncPtr f2 = SayHello;
+            f2("SCY", 30);
+
+            int[] numbes  = new int[] { 1, 2, 3, 4 };
+            IEnumerable<int> NumberQuery = 
+            from elem in numbes
+            where elem % 2 == 0
+            select elem;
+            
+            foreach(var item in NumberQuery)
+            {
+                System.Console.WriteLine(item);
+            } 
+            
         }
 
         public static void StatementDemo() 
@@ -225,12 +334,24 @@ namespace MetaReview
             * pattern: sim
             * feature:
                 - Abstract
+                    $ concrete vs abstract
+
                 - Encapsulation
+                    $ access privilages
+                        ~ private
+                        ~ public
+                        ~ friend
+                        ~ static
+
                 - Inheritance
                     $ is-a
                     $ has-a
 
                 - Polymorphism
+                    $ virtual
+                    $ =0
+                    $ override
+                    $ operator
 
             * structure:
                 ^ default ctor

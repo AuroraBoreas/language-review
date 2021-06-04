@@ -1,6 +1,6 @@
 using System;
 
-using lib = MetaReview.TS;
+using lib = MetaReview;
 
 namespace TS
 {
@@ -32,6 +32,9 @@ namespace TS
 
             Console.WriteLine("\n=== Algorithm ===");
             lib.AlgorithmDemo();
+
+            Console.ReadLine();
+            
         }
     }
 }
