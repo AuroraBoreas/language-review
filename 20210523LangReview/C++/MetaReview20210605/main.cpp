@@ -17,5 +17,8 @@ int main()
     std::cout << "\n=== secret runes ===" << std::endl;
     TS::algo_secret_runes();
 
+    std::cout << "\n=== queries ===" << std::endl;
+    TS::algo_queries();
+
     return 0;
 }

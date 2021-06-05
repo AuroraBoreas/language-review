@@ -187,10 +187,64 @@ void TS::algo_secret_runes(void)
     TS::print<int>("v is sorted until : ", *it);
     it = std::is_heap_until(v.begin(), v.end());
     TS::print<int>("v is sorted until : ", *it);
-    it = std::is_
+    // it = std::is_partitioned_until() // in 3rd party library, Boost
+
     // *_copy
+
+
     // *_n
 
 
     // *_if
+}
+
+void TS::algo_queries(void)
+{
+    std::vector<int> v(10, 2);
+    TS::print<int>("original,         v-> ", v);
+    // numeric algorithms
+    // count
+    int times = std::count(v.begin(), v.end(), 2);
+    TS::print<int>("2 appear times  : ", times);
+
+    // accumulate
+    int result = std::accumulate(v.begin(), v.end(), 0);
+    TS::print<int>("sum of v        : ", result);
+
+    // (transform_)reduce, C++ >= 17
+    // result = std::reduce(std::execution::seq, v.begin(), v.end());
+    // TS::print<int>(result);
+
+    // partial_sum
+    std::cout << "partial_sum     : ";
+    std::partial_sum(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+
+    // (transform_)inclusive_scan, not work in codeblock and VS?
+    //    std::cout << "inclusive_scan  : ";
+    //    std::inclusive_scan(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+    //    std::cout << "exclusive_scan  : ";
+    //    // (transform_)exclusive scan
+    //    std::exclusive_scan(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+    //    std::cout << std::endl;
+
+
+
+    // inner_product
+    v = { 2, 2, 2 };
+    std::vector<int> w = { 3, 3, 3 };
+    result = std::inner_product(v.begin(), v.end(), w.begin(), 0);
+    TS::print<int>("inner_product   : ", result);
+    std::cout << std::endl;
+
+    // adjacent_difference
+    v = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+    TS::print<int>("original,            v-> ", v);
+    std::adjacent_difference(v.begin(), v.end(), v.begin());
+    TS::print<int>("adjacent_differences v-> ", v);
+
+    // sample
+
+    std::string in = "zhangliang and tangsai", out;
+    std::sample(in.begin(), in.end(), std::back_insert(out), std::mt199937{std::random_});
 }

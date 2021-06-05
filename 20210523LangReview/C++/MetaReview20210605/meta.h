@@ -25,6 +25,7 @@ c++, algorithm review
 #include <algorithm>
 #include <functional>
 #include <iterator>
+#include <numeric>
 #include <string>
 #include <string_view>
 #include <random>
@@ -43,6 +44,8 @@ namespace TS
 	void algo_permutation_partition(void);
 	void algo_permutation_other(void);
 	void algo_secret_runes(void);
+
+	void algo_queries(void);
 }
 
 #endif // META_H_INCLUDED
