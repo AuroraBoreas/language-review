@@ -178,9 +178,11 @@ void TS::algo_secret_runes(void)
     rv = std::is_heap(v.begin(), v.end());
     TS::print("v is heap?         -> ", rv);
 
+    // is_*_until
+
     // *_copy
     // *_n
-    // is_*_until
+
 
     // *_if
 }
