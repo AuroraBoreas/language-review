@@ -20,5 +20,8 @@ int main()
     std::cout << "\n=== queries ===" << std::endl;
     TS::algo_queries();
 
+    std::cout << "\n=== query property ===" << std::endl;
+    TS::algo_query_property();
+
     return 0;
 }

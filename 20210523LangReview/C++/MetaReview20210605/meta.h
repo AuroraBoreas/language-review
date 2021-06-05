@@ -46,6 +46,7 @@ namespace TS
 	void algo_secret_runes(void);
 
 	void algo_queries(void);
+	void algo_query_property(void);
 }
 
 #endif // META_H_INCLUDED

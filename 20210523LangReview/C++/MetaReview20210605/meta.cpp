@@ -247,3 +247,30 @@ void TS::algo_queries(void)
     TS::print<std::string>("five random letters : ", out);
     std::cout << std::endl;
 }
+
+void TS::algo_query_property(void)
+{
+    std::vector<std::string> w { "TS", "XY", "LL", "SCY" };
+    TS::print<std::string>("original w-> ", w);
+    std::function predict = [](const std::string& elem){return elem.length() > 2; };
+    // all_of
+    bool result = std::all_of(w.begin(), w.end(), predict);
+    TS::print<bool>("std::all_of str.length()>2 : ", result);
+    // any_of
+    result = std::any_of(w.begin(), w.end(), predict);
+    TS::print<bool>("std::any_of str.length()>2 : ", result);
+    // none_of
+    result = std::none_of(w.begin(), w.end(), predict);
+    TS::print<bool>("std::none_of str.length()>2: ", result);
+
+    // equal
+    std::function is_palindrome = [](const std::string_view& s){
+        return std::equal(s.begin(), s.begin() + s.size()/2, s.rbegin());
+    };
+    TS::print<bool>("radar is a palindrome? -> ", is_palindrome("radar"));
+    TS::print<bool>("hello is a palindrome? -> ", is_palindrome("hello"));
+    // lexicographical_compare
+    // std::lexicographical_compare();
+    // mismatch
+    // std::mismatch();
+}
