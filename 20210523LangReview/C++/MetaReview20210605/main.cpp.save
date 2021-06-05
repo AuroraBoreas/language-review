@@ -1,0 +1,9 @@
+#include "meta.h"
+
+int main()
+{
+    std::cout << "\n=== permutation heap ===" << std::endl;
+    TS::algo_permutation_heap();
+
+    return 0;
+}
