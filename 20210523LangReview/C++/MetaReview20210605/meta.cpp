@@ -14,7 +14,8 @@ void TS::print(const std::string& comment, std::vector<T> v)
     std::cout << std::endl;
 }
 
-void TS::print(const std::string& comment, bool result)
+template<typename U>
+void TS::print(const std::string& comment, U result)
 {
     std::cout << comment;
     std::cout << std::boolalpha << result << std::endl;
@@ -172,13 +173,21 @@ void TS::algo_secret_runes(void)
     v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
     TS::print<int>("original, v-> ", v);
     bool rv = std::is_sorted(v.begin(), v.end());
-    TS::print("v is sorted?       -> ", rv);
+    TS::print<bool>("v is sorted?       -> ", rv);
     rv = std::is_partitioned(v.begin(), v.end(), predict);
-    TS::print("v is partitioned?  -> ", rv);
+    TS::print<bool>("v is partitioned?  -> ", rv);
     rv = std::is_heap(v.begin(), v.end());
-    TS::print("v is heap?         -> ", rv);
+    TS::print<bool>("v is heap?         -> ", rv);
+    std::cout << "\n";
 
     // is_*_until
+    v = { 1, 2, 3, 4, 16, 17, 14, 11, 10, 11 };
+    TS::print<int>("original, v-> ", v);
+    auto it = std::is_sorted_until(v.begin(), v.end());
+    TS::print<int>("v is sorted until : ", *it);
+    it = std::is_heap_until(v.begin(), v.end());
+    TS::print<int>("v is sorted until : ", *it);
+    // it = std::is_partitioned_until() // in 3rd party library, Boost
 
     // *_copy
     // *_n

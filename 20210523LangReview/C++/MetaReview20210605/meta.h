@@ -34,7 +34,9 @@ namespace TS
     template<class T>
     void print(const std::string& comment, std::vector<T> v);
 
-    void print(const std::string& comment, bool result);
+
+    template<typename U>
+    void print(const std::string& comment, U result);
 
 	void algo_permutation_heap(void);
 	void algo_permutation_sort(void);
