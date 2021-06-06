@@ -59,13 +59,6 @@ void TS::algo_permutation_heap(void)
     btm = v.back();
     v.pop_back();
     TS::print<int>("pop heap:     v -> ", v);
-
-	// structure changer
-	// mover
-	// value modifier
-	// algorithm of set
-	// query
-	// raw memory
 }
 
 void TS::algo_permutation_sort(void)
@@ -95,6 +88,13 @@ void TS::algo_permutation_sort(void)
     TS::print<int>("after sort:   v-> ", v);
 
     // inplace merge
+    std::vector<int> x1 { 1, 2, 3 };
+    std::vector<int> x2 { 4, 5, 6 };
+    std::vector<int> dst;
+    std::merge(x1.begin(), x1.end(), x2.begin(), x2.end(), std::back_inserter(dst));
+    std::cout << "after std::merge\n" "merged - >";
+    std::copy(std::begin(dst), std::end(dst), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
 }
 
 void TS::algo_permutation_partition(void)
@@ -152,58 +152,91 @@ void TS::algo_permutation_other(void)
     std::cout << "after reverse  : s-> ";
     std::for_each(s.begin(), s.end(), [](char elem){ std::cout << elem << " "; });
     std::cout << "\n";
-
 }
 
 void TS::algo_secret_runes(void)
 {
-    std::vector<int> v { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
-    TS::print<int>("original,         v-> ", v);
-
-    // stable_*
-    std::sort(v.begin(), v.end());
-    TS::print<int>("std::sort,        v-> ", v);
-    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
-    std::stable_sort(v.begin(), v.end());
-    TS::print<int>("std::stable_sort, v-> ", v);
-
-    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
-    auto predict = [](int i)->bool{ return i%2==0; };
-    std::partition(v.begin(), v.end(), predict);
-    TS::print<int>("std::partition,        v-> ", v);
-
-    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
-    std::stable_partition(v.begin(), v.end(), predict);
-    TS::print<int>("std::stable_partition, v-> ", v);
-    std::cout << "\n";
-
-    // is_*
-    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
-    TS::print<int>("original, v-> ", v);
-    bool rv = std::is_sorted(v.begin(), v.end());
-    TS::print<bool>("v is sorted?       -> ", rv);
-    rv = std::is_partitioned(v.begin(), v.end(), predict);
-    TS::print<bool>("v is partitioned?  -> ", rv);
-    rv = std::is_heap(v.begin(), v.end());
-    TS::print<bool>("v is heap?         -> ", rv);
-    std::cout << "\n";
-
-    // is_*_until
-    v = { 1, 2, 3, 4, 16, 17, 14, 11, 10, 11 };
-    TS::print<int>("original, v-> ", v);
-    auto it = std::is_sorted_until(v.begin(), v.end());
-    TS::print<int>("v is sorted until : ", *it);
-    it = std::is_heap_until(v.begin(), v.end());
-    TS::print<int>("v is sorted until : ", *it);
+//    std::vector<int> v { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
+//    TS::print<int>("original,         v-> ", v);
+//
+//    // stable_*
+//    std::sort(v.begin(), v.end());
+//    TS::print<int>("std::sort,        v-> ", v);
+//    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
+//    std::stable_sort(v.begin(), v.end());
+//    TS::print<int>("std::stable_sort, v-> ", v);
+//
+//    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
+//    auto predict = [](int i)->bool{ return i%2==0; };
+//    std::partition(v.begin(), v.end(), predict);
+//    TS::print<int>("std::partition,        v-> ", v);
+//
+//    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
+//    std::stable_partition(v.begin(), v.end(), predict);
+//    TS::print<int>("std::stable_partition, v-> ", v);
+//    std::cout << "\n";
+//
+//    // is_*
+//    v = { 13, 4, 19, 3, 16, 17, 14, 11, 10, 11 };
+//    TS::print<int>("original, v-> ", v);
+//    bool rv = std::is_sorted(v.begin(), v.end());
+//    TS::print<bool>("v is sorted?       -> ", rv);
+//    rv = std::is_partitioned(v.begin(), v.end(), predict);
+//    TS::print<bool>("v is partitioned?  -> ", rv);
+//    rv = std::is_heap(v.begin(), v.end());
+//    TS::print<bool>("v is heap?         -> ", rv);
+//    std::cout << "\n";
+//
+//    // is_*_until
+//    v = { 1, 2, 3, 4, 16, 17, 14, 11, 10, 11 };
+//    TS::print<int>("original, v-> ", v);
+//    auto it = std::is_sorted_until(v.begin(), v.end());
+//    TS::print<int>("v is sorted until : ", *it);
+//    it = std::is_heap_until(v.begin(), v.end());
+//    TS::print<int>("v is heap until : ", *it);
     // it = std::is_partitioned_until() // in 3rd party library, Boost
 
     // *_copy
+    /*
+    @ R U P
+    remove_copy,
+    reverse_copy,
+    replace_copy,
+    rotate_copy,
 
+    unique_copy,
 
-    // *_n
-
+    partition_copy,
+    partial_sort_copy
+    */
+    std::vector<int> x1 {1, 1, 3, 99, 99, 99, 0, -1, 99};
+    TS::print<int>("original, collection ->", x1);
+    std::vector<int> x2(10);
+    std::remove_copy(std::begin(x1), std::end(x1), x2.begin(), 99);
+    std::cout << "after std::remove_copy, collection ->";
+    std::copy(x2.begin(), x2.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
 
     // *_if
+    /*
+    @ F R C
+    find_if
+    find_if_not
+
+    remove_if
+    remove_copy_if
+    replace_if
+    replace_copy_if
+
+    copy_if
+    */
+
+    // *_n
+    /*
+    @
+
+    */
+
 }
 
 void TS::algo_queries(void)
@@ -383,7 +416,7 @@ void TS::algo_mover(void)
     std::copy(to_vector.begin(), to_vector.end(), std::ostream_iterator<int>(std::cout, " "));
     std::cout << std::endl;
 
-    // using std::move when std::copy wont work(i.e., std::thread is not copyable)
+    // using std::move when std::copy wont work(i.e., std::function, std::thread are not copyable)
     std::function f = [](int n){
         std::this_thread::sleep_for(std::chrono::seconds(n));
         std::cout << "thread " << n << " ended" << std::endl;
@@ -401,19 +434,95 @@ void TS::algo_mover(void)
     // std::forward
     // ? Q: how does it implemented by compiler under the hood?
     std::vector<A> v1;
-    TS::A a1 = TS::A(); // default ctor
-    TS::A a2 = TS::A(a1); // copy ctor;
-
+    TS::A a1 = TS::A(); // calls default-ctor
+    TS::A a2 = TS::A(a1); // calls copy-ctor;
+    TS::A a3 = a1; // calls copy-assignmetn-operator
     /*
     # compiler calls default-ctor to create a temporary instace of A
     # then calls move-ctor;
     # because A() is temporary. it will be destroyed momentarily;
     */
-    TS::A a3 = a1; // calls copy assignmetn operator
-    v1.emplace_back(TS::A());
-    a3 = st
-
+    v1.emplace_back(TS::A()); // calls default-ctor, move-ctor
+    a3 = std::move(a1); // calls move-assignment-operator
 
     // std::swap_ranges
+    std::vector<char> v2 = {'a', 'b', 'c', 'd', 'e'};
+    std::list<char> l2 = {'1', '2', '3', '4', '5'};
+
+    auto print = [](const std::string& comment, auto const& seq){
+        std::cout << comment;
+        for(const auto& e : seq) { std::cout << e << ' '; }
+        std::cout << std::endl;
+    };
+    print("Before swap_ranges:\n" "v -> ", v2);
+    print("l -> ", l2);
+
+    std::swap_ranges(v2.begin(), v2.end(), l2.begin());
+    print("After swap_ranges:\n" "v -> ", v2);
+    print("l -> ", l2);
+}
+
+void TS::algo_value_modifier(void)
+{
+    // fill
+    std::vector<int> v(10);
+    std::fill(v.begin(), v.end(), 42);
+    TS::print<int>("after std::fill,  v-> ", v);
+
+    // generate
+    std::srand(std::time(nullptr));
+    std::function f = [](){ return std::rand() % 20; };
+    std::generate(std::begin(v), std::end(v), f);
+    TS::print<int>("after std::generate,  v-> ", v);
+
+    // iota
+    // ! screw you, iota is a acronym from APL language. lol
+    std::iota(v.begin(), v.end(), 42);
+    TS::print<int>("after std::iota, v-> ", v);
+
+    // replace
+    std::replace(v.begin(), v.end(), 42, 43);
+    TS::print<int>("after std::replace, v-> ", v);
+
+}
+
+void TS::algo_structure_changer(void)
+{
+    std::list<int> u {1, 2, 99, 99, 99, -1, -2, 99, 0, 1};
+    auto print = [](const std::string& comment, auto const& seq){
+        std::cout << comment;
+        for(const auto& e : seq) { std::cout << e << " "; }
+        std::cout << std::endl;
+    };
+    print("original, u -> ", u);
+
+    // std::remove
+    // std::remove(u.begin(), u.end(), 99);
+    // print("after std::remove, u -> ", u);
+
+    // collection.erase
+    u.erase(std::remove(u.begin(), u.end(), 99), u.end());
+    print("after std::remove and erase, u -> ", u);
+
+    // std::unique,
+    // ! remove only adjacent element with the exactly same value;
+    u = {1, 2, 99, 99, 99, -1, -2, 99, 0, 1};
+    u.erase(std::unique(u.begin(), u.end()), u.end());
+    print("after std::unique, u -> ", u);
+}
+
+void TS::algo_lone_island(void)
+{
+    // for_each, notice that it has a side effect we can exploit;
+    std::vector<char> ts {'t', 'a', 'n', 'g', ' ', 's', 'a', 'i'};
+    std::cout << "name: ";
+    std::for_each(ts.begin(), ts.end(), [](const auto& e){ std::cout << e; });
+    std::cout << "\n";
+
+    // transform
+    std::list<char> ts_upper;
+    std::transform(std::begin(ts), std::end(ts), std::back_inserter(ts_upper), [](const auto& e){
+                   std::toupper                  
+                   });
 
 }

@@ -2,6 +2,11 @@
 
 int main()
 {
+    std::cout << "\n******************************";
+    std::cout << "\n* C++ meta review            *";
+    std::cout << "\n* @ZL, 20210606              *";
+    std::cout << "\n******************************" "\n";
+
     std::cout << "\n=== permutation heap ===" << std::endl;
     TS::algo_permutation_heap();
 
@@ -31,6 +36,15 @@ int main()
 
     std::cout << "\n=== movers ===" << std::endl;
     TS::algo_mover();
+
+    std::cout << "\n=== value modifier ===" << std::endl;
+    TS::algo_value_modifier();
+
+    std::cout << "\n=== structure changer ===" << std::endl;
+    TS::algo_structure_changer();
+
+    std::cout << "\n=== lone island ===" << std::endl;
+    TS::algo_lone_island();
 
     return 0;
 }

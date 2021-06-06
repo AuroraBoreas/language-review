@@ -31,6 +31,8 @@ c++, algorithm review
 #include <random>
 #include <thread>
 #include <chrono>
+#include <ctime>
+#include <cctype>
 
 namespace TS
 {
@@ -92,10 +94,12 @@ namespace TS
         { std::cout << "dtor..." << std::endl; }
 
     };
+
 	void algo_permutation_heap(void);
 	void algo_permutation_sort(void);
 	void algo_permutation_partition(void);
 	void algo_permutation_other(void);
+
 	void algo_secret_runes(void);
 
 	void algo_queries(void);
@@ -105,6 +109,12 @@ namespace TS
 	void algo_of_set(void);
 
 	void algo_mover(void);
+
+	void algo_value_modifier(void);
+
+	void algo_structure_changer(void);
+
+	void algo_lone_island(void);
 }
 
 #endif // META_H_INCLUDED
