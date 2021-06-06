@@ -383,7 +383,7 @@ void TS::algo_mover(void)
     std::copy(to_vector.begin(), to_vector.end(), std::ostream_iterator<int>(std::cout, " "));
     std::cout << std::endl;
 
-    // using std::move when std::copy wont work(i.e., std::thread is not copyable)
+    // using std::move when std::copy wont work(i.e., std::function, std::thread are not copyable)
     std::function f = [](int n){
         std::this_thread::sleep_for(std::chrono::seconds(n));
         std::cout << "thread " << n << " ended" << std::endl;
@@ -396,9 +396,21 @@ void TS::algo_mover(void)
     std::list<std::thread> l;
     std::move(v.begin(), v.end(), std::back_inserter(l));
     for(auto& t : l) { t.join(); }
+    std::cout << std::endl;
 
     // std::forward
     // ? Q: how does it implemented by compiler under the hood?
+    std::vector<A> v1;
+    TS::A a1 = TS::A(); // calls default-ctor
+    TS::A a2 = TS::A(a1); // calls copy-ctor;
+    TS::A a3 = a1; // calls copy-assignmetn-operator
+    /*
+    # compiler calls default-ctor to create a temporary instace of A
+    # then calls move-ctor;
+    # because A() is temporary. it will be destroyed momentarily;
+    */
+    v1.emplace_back(TS::A()); // calls default-ctor, move-ctor
+    a3 = std::move(a1); // calls move-assignment-operator
 
     // std::swap_ranges
 

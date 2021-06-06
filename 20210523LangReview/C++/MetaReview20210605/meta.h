@@ -43,6 +43,55 @@ namespace TS
     template<typename U>
     void print(const std::string& comment, U result);
 
+    struct A
+    {
+    private:
+        int* ptr;
+    public:
+        // default ctor
+        A()
+        {
+            std::cout << "default ctor..." << std::endl;
+            ptr = new int;
+        }
+        // ctor
+        A(int& i)
+        {
+            std::cout << "lhs ref ctor..." << std::endl;
+            ptr = new int(i);
+        }
+        // copy assignment operator
+        A& operator=(A& a)
+        {
+            std::cout << "copy assign op..." << std::endl;
+            std::swap(this->ptr, a.ptr);
+            return *this;
+        }
+        // copy ctor
+        A(A& a)
+        {
+            std::cout << "copy ctor..." << std::endl;
+            this->ptr = a.ptr;
+        }
+        // move ctor
+        A(A&& a)
+        {
+            std::cout << "move ctor..." << std::endl;
+            this->ptr = a.ptr;
+            a.ptr = nullptr;
+        }
+        // move assignment operator
+        A& operator=(A&& a)
+        {
+            std::cout << "move assignment operator..." << std::endl;
+            this->ptr = std::move(a.ptr);
+            return *this;
+        }
+        // dtor
+        ~A()
+        { std::cout << "dtor..." << std::endl; }
+
+    };
 	void algo_permutation_heap(void);
 	void algo_permutation_sort(void);
 	void algo_permutation_partition(void);
