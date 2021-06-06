@@ -29,6 +29,8 @@ c++, algorithm review
 #include <string>
 #include <string_view>
 #include <random>
+#include <thread>
+#include <chrono>
 
 namespace TS
 {
@@ -52,6 +54,8 @@ namespace TS
 	void algo_search_value(void);
 
 	void algo_of_set(void);
+
+	void algo_mover(void);
 }
 
 #endif // META_H_INCLUDED

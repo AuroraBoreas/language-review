@@ -358,5 +358,48 @@ void TS::algo_of_set(void)
     // union
     std::cout << "\nA union B ->";
     std::set_union(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+    // subset
+    std::set<int> C = { 1, 2, 3 };
+    TS::print<int>("set C -> ", C);
+    bool rv = std::includes(A.begin(), A.end(), C.begin(), C.end());
+    TS::print<bool>("C is subset of A -> ", rv);
+}
+
+void TS::algo_mover(void)
+{
+
+    std::vector<int> from_vector(10);
+    // std::iota
+    std::iota(from_vector.begin(), from_vector.end(), 1);
+    TS::print<int>("from_vector -> ", from_vector);
+    // std::copy
+    std::vector<int> to_vector(15);
+    std::copy(from_vector.begin(), from_vector.end(), std::back_inserter(to_vector));
+    TS::print<int>("to_vector -> ", to_vector);
+    std::cout << std::endl;
+    // std::copy_backward
+    std::copy_backward(from_vector.begin(), from_vector.end(), to_vector.end());
+    std::cout << "\nstd::copy_backward -> ";
+    std::copy(to_vector.begin(), to_vector.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+
+    // using std::move when std::copy wont work(i.e., std::thread is not copyable)
+    std::function f = [](int n){
+        std::this_thread::sleep_for(std::chrono::seconds(n));
+        std::cout << "thread " << n << " ended" << std::endl;
+    };
+
+    std::vector<std::thread> v;
+    v.emplace_back(f, 1);
+    v.emplace_back(f, 2);
+    v.emplace_back(f, 3);
+    std::list<std::thread> l;
+    std::move(v.begin(), v.end(), std::back_inserter(l));
+    for(auto& t : l) { t.join(); }
+
+    // std::forward
+    // ? Q: how does it implemented by compiler under the hood?
+
+    // std::swap_ranges
 
 }

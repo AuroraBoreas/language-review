@@ -29,5 +29,8 @@ int main()
     std::cout << "\n=== algo of set ===" << std::endl;
     TS::algo_of_set();
 
+    std::cout << "\n=== movers ===" << std::endl;
+    TS::algo_mover();
+
     return 0;
 }

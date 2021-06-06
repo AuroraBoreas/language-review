@@ -14,7 +14,7 @@ void TS::print(const std::string& comment, std::vector<T> v)
     std::cout << std::endl;
 }
 
-template<clas T>
+template<class T>
 void TS::print(const std::string& comment, std::set<T> s)
 {
     std::cout << comment;
@@ -343,13 +343,49 @@ void TS::algo_of_set(void)
 {
     std::set<int> A = { 1, 2, 3, 4, 5 };
     std::set<int> B = { 4, 5, 6, 7, 8 };
-    TS::print<int>()
+    TS::print<int>("set A -> ", A);
+    TS::print<int>("set B -> ", B);
 
     // intersection
-
+    std::cout << "\nA intersection B -> ";
     std::set_intersection(std::begin(A), std::end(A), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
     // difference
+    std::cout << "\nA - B ->";
+    std::set_difference(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
     // symmetric difference
+    std::cout << "\nsymmetric difference -> ";
+    std::set_symmetric_difference(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
     // union
-    // subset?
+    std::cout << "\nA union B ->";
+    std::set_union(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+    // subset
+    std::set<int> C = { 1, 2, 3 };
+    TS::print<int>("set C -> ", C);
+    bool rv = std::includes(A.begin(), A.end(), C.begin(), C.end());
+    TS::print<bool>("C is subset of A -> ", rv);
+}
+
+void TS::algo_mover(void)
+{
+
+    std::vector<int> from_vector(10);
+    // std::iota
+    std::iota(from_vector.begin(), from_vector.end(), 1);
+    TS::print<int>("from_vector -> ", from_vector);
+    // std::copy
+    std::vector<int> to_vector(15);
+    std::copy(from_vector.begin(), from_vector.end(), std::back_inserter(to_vector));
+    TS::print<int>("to_vector -> ", to_vector);
+    std::cout << std::endl;
+    // std::copy_backward
+    std::copy_backward(from_vector.begin(), from_vector.end(), to_vector.end());
+    std::cout << "\nstd::copy_backward -> ";
+    std::copy(to_vector.begin(), to_vector.end(), std::ostream_iterator<int>(std::cout, " "));
+
+    // using std::move when std::copy wont work(i.e., std::thread is not copyable)
+    std::function f = [](int n){
+    
+    };
+    
+    // std::
 }
