@@ -14,6 +14,14 @@ void TS::print(const std::string& comment, std::vector<T> v)
     std::cout << std::endl;
 }
 
+template<clas T>
+void TS::print(const std::string& comment, std::set<T> s)
+{
+    std::cout << comment;
+    std::for_each(s.begin(), s.end(), [](const T& elem){ std::cout << elem << ' '; });
+    std::cout << std::endl;
+}
+
 template<typename U>
 void TS::print(const std::string& comment, U result)
 {
@@ -324,6 +332,24 @@ void TS::algo_search_value(void)
     {
         auto lower = std::lower_bound(std::begin(data), std::end(data), i);
         std::cout << i << " <= ";
-        lower != std::en
+        lower != std::end(data)
+            ? std::cout << *lower << " at index " << std::distance(data.begin(), lower)
+            : std::cout << "[not found]";
+        std::cout << '\n';
     }
+}
+
+void TS::algo_of_set(void)
+{
+    std::set<int> A = { 1, 2, 3, 4, 5 };
+    std::set<int> B = { 4, 5, 6, 7, 8 };
+    TS::print<int>()
+
+    // intersection
+
+    std::set_intersection(std::begin(A), std::end(A), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+    // difference
+    // symmetric difference
+    // union
+    // subset?
 }

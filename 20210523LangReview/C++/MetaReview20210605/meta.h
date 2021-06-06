@@ -35,6 +35,8 @@ namespace TS
     template<class T>
     void print(const std::string& comment, std::vector<T> v);
 
+    template<class T>
+    void print(const std::string& comment, std::set<T> s);
 
     template<typename U>
     void print(const std::string& comment, U result);
@@ -48,6 +50,8 @@ namespace TS
 	void algo_queries(void);
 	void algo_query_property(void);
 	void algo_search_value(void);
+
+	void algo_of_set(void);
 }
 
 #endif // META_H_INCLUDED

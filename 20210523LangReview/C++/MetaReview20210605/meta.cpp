@@ -14,6 +14,14 @@ void TS::print(const std::string& comment, std::vector<T> v)
     std::cout << std::endl;
 }
 
+template<class T>
+void TS::print(const std::string& comment, std::set<T> s)
+{
+    std::cout << comment;
+    std::for_each(s.begin(), s.end(), [](const T& elem){ std::cout << elem << ' '; });
+    std::cout << std::endl;
+}
+
 template<typename U>
 void TS::print(const std::string& comment, U result)
 {
@@ -329,4 +337,26 @@ void TS::algo_search_value(void)
             : std::cout << "[not found]";
         std::cout << '\n';
     }
+}
+
+void TS::algo_of_set(void)
+{
+    std::set<int> A = { 1, 2, 3, 4, 5 };
+    std::set<int> B = { 4, 5, 6, 7, 8 };
+    TS::print<int>("set A -> ", A);
+    TS::print<int>("set B -> ", B);
+
+    // intersection
+    std::cout << "\nA intersection B -> ";
+    std::set_intersection(std::begin(A), std::end(A), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+    // difference
+    std::cout << "\nA - B ->";
+    std::set_difference(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+    // symmetric difference
+    std::cout << "\nsymmetric difference -> ";
+    std::set_symmetric_difference(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+    // union
+    std::cout << "\nA union B ->";
+    std::set_union(A.begin(), A.end(), B.begin(), B.end(), std::ostream_iterator<int>(std::cout, " "));
+
 }

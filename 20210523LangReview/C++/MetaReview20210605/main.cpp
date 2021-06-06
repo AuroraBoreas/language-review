@@ -26,5 +26,8 @@ int main()
     std::cout << "\n=== query value ===" << std::endl;
     TS::algo_search_value();
 
+    std::cout << "\n=== algo of set ===" << std::endl;
+    TS::algo_of_set();
+
     return 0;
 }
