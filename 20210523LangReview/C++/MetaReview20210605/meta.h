@@ -47,6 +47,7 @@ namespace TS
 
 	void algo_queries(void);
 	void algo_query_property(void);
+	void algo_search_value(void);
 }
 
 #endif // META_H_INCLUDED

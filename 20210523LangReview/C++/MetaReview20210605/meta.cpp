@@ -283,3 +283,50 @@ void TS::algo_query_property(void)
                                   std::mismatch(x.begin(), x.end(), x.rbegin()).first);
     TS::print<std::string>("abXYZba has mirror part? -> ", str);
 }
+
+void TS::algo_search_value(void)
+{
+    // @ unsorted collection: find, find_adjacent
+    std::vector<int> v{1,2,3,4};
+    TS::print<int>("original v -> ", v);
+
+    int n1 = 3;
+    std::function is_even = [](int i){ return i%2==0; };
+
+    // @ TIL: tenary operation in C++, branches should be exactly same type;
+    auto rv1 = std::find(v.begin(), v.end(), n1);
+    auto rv2 = std::find_if(v.begin(), v.end(), is_even);
+    (rv1 != std::end(v))
+        ? (std::cout << "result1 3 in v -> " << n1 << std::endl)
+        : (std::cout << "not found \n");
+
+    (rv2 != std::end(v))
+        ? (std::cout << "result1 is_even -> " << *rv2 << std::endl)
+        : std::cout << "not found \n";
+
+    // @ sorted collection: binary_search, equal_range, lower_bound, upper_bound;
+    std::vector<int> haystack {1, 2, 3, 4, 5, 9};
+    std::vector<int> needles {1, 2, 3};
+    // std::binary_search
+    for(auto needle : needles)
+    {
+        std::cout << "Searching for " << needle << "\n";
+        if(std::binary_search(haystack.begin(), haystack.end(), needle))
+        {
+            std::cout << "Found " << needle << "\n";
+        } else {
+            std::cout << "no dice!\n";
+        }
+    }
+    // std::lower_bound
+    const std::vector<int> data = { 1, 2, 3, 4, 5, 6 };
+    for(int i=0; i<8; i++)
+    {
+        auto lower = std::lower_bound(std::begin(data), std::end(data), i);
+        std::cout << i << " <= ";
+        lower != std::end(data)
+            ? std::cout << *lower << " at index " << std::distance(data.begin(), lower)
+            : std::cout << "[not found]";
+        std::cout << '\n';
+    }
+}
