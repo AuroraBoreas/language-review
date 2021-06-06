@@ -269,8 +269,17 @@ void TS::algo_query_property(void)
     };
     TS::print<bool>("radar is a palindrome? -> ", is_palindrome("radar"));
     TS::print<bool>("hello is a palindrome? -> ", is_palindrome("hello"));
-    // lexicographical_compare
+    std::cout << std::endl;
+
     // std::lexicographical_compare();
-    // mismatch
+    std::vector<char> v1 {'a', 'b', 'c', 'd'};
+    std::vector<char> v2 {'a', 'b', 'c', 'd'};
+    result = std::lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end());
+    TS::print<bool>("std::lexicographical_compare v1 == v2? -> ", result);
+
     // std::mismatch();
+    std::string x = "abXYzba";
+    std::string str = std::string(x.begin(),
+                                  std::mismatch(x.begin(), x.end(), x.rbegin()).first);
+    TS::print<std::string>("abXYZba has mirror part? -> ", str);
 }
