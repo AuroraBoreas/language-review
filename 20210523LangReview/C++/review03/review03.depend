@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1623040430 source:c:\users\5106001995\desktop\20210523langreview\c++\review03\main.cpp
+	"meta.h"
+
+1623049777 c:\users\5106001995\desktop\20210523langreview\c++\review03\meta.h
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<cctype>
+	<ctime>
+	<random>
+	<thread>
+	<chrono>
+	<array>
+	<vector>
+	<list>
+	<forward_list>
+	<deque>
+	<queue>
+	<stack>
+	<map>
+	<set>
+	<unordered_map>
+	<unordered_set>
+	<numeric>
+	<functional>
+	<iterator>
+	<algorithm>
+
+1623054379 source:c:\users\5106001995\desktop\20210523langreview\c++\review03\meta.cpp
+	"meta.h"
+
