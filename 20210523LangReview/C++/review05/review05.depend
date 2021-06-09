@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1623140624 source:c:\users\5106001995\desktop\git\20210523langreview\c++\review05\ctor.cpp
+	"ctor.h"
+
+1623149238 c:\users\5106001995\desktop\git\20210523langreview\c++\review05\ctor.h
+	<iostream>
+
