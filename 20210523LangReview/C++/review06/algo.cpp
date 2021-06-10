@@ -29,6 +29,7 @@ void TS::algo_permutation_heap(void)
     v.push_back(rnd);
     std::push_heap(v.begin(), v.end(), std::greater<>{});
     TS::print("std::push_heap, v-> ", v);
+
 }
 
 void TS::algo_permutation_sort(void)
