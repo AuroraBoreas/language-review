@@ -24,12 +24,11 @@ void TS::algo_permutation_heap(void)
     TS::print("std::pop_heap, v-> ", v);
     int top = v.back();
     v.pop_back();
-    std::cout << "collecdtion.top, top -> " << top << std::endl;
+    std::cout << "collection.top, top -> " << top << std::endl;
 
-    v.push_back(rnd);
+    v.push_back(rnd());
     std::push_heap(v.begin(), v.end(), std::greater<>{});
     TS::print("std::push_heap, v-> ", v);
-
 }
 
 void TS::algo_permutation_sort(void)
@@ -55,6 +54,16 @@ void TS::algo_permutation_sort(void)
     std::generate(v.begin(), v.begin(), [](){
                     return std::rand()%100;
                   });
+
+    auto pp = std::partition_point(v.begin(), v.end(), [](const auto& e){
+                            return e%2==0;
+                         });
+    std::cout << *pp << std::endl;
+    std::list<int> l;
+    std::copy(v.begin(), v.end(), std::back_inserter(l));
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::shuffle(v.begin(), v.end(), mt);
 }
 
 void TS::algo_structure_changer(void)
@@ -171,9 +180,4 @@ void TS::algo_query_value(void)
         ~ exclusive_scan
     ===
     */
-}
-
-void TS::algo_(void)
-{
-
 }

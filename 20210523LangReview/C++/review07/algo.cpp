@@ -320,7 +320,6 @@ void algo_raw_memory(void)
     ===
     - uninitialized_*
     - initialized_*
-    
     ===
     */
 
