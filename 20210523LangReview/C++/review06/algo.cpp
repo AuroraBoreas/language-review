@@ -64,6 +64,9 @@ void TS::algo_permutation_sort(void)
     std::random_device rd;
     std::mt19937 mt(rd());
     std::shuffle(v.begin(), v.end(), mt);
+
+    std::set_intersection()
+    std::transform()
 }
 
 void TS::algo_structure_changer(void)
