@@ -3,34 +3,37 @@
 
 #include <iostream>
 #include <iomanip>
-#include <string>
 
-#include <cctype>
+#include <string>
 #include <ctime>
-#include <cstdlib>
-#include <thread>
 #include <chrono>
-#include <random>
+#include <thread>
 
 #include <vector>
 #include <list>
 #include <set>
 
 #include <iterator>
-#include <numeric>
 #include <algorithm>
-#include <execution> // C++>=20?
+#include <numeric>
 
 namespace TS
 {
-    const std::string b = " ";
-    int const w = 35;
-    auto print = [](const std::string& c, auto const& v){
+    inline void new_line(void)
+    { std::cout << std::endl; }
+
+    std::string& const b = " ";
+    char const w = 35;
+
         std::cout << c;
         for(auto& e : v) {
-            std::cout << std::setw(TS::w) << std::setfill(TS::b) << e << TS::b:
+            std::cout << std::setw(TS::w) << std::setfill(TS::b) << e << TS::b;
         }
+        TS::new_line();
     };
+
+    inline void o(const std::string& t)
+    { std::cout << "\n=== " << t << " ===\n"; }
 
     inline void func(int const& i)
     {
@@ -51,4 +54,4 @@ namespace TS
     void algo_lone_island(void);
 }
 
-#endif
+#endif // ALGO_H_INCLUDED

@@ -4,35 +4,41 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-
 #include <cctype>
-#include <ctime>
-#include <cstdlib>
-#include <thread>
-#include <chrono>
+
 #include <random>
+#include <ctime>
+#include <chrono>
+#include <thread>
 
 #include <vector>
 #include <list>
 #include <set>
 
 #include <iterator>
-#include <numeric>
 #include <algorithm>
-#include <execution> // C++>=20?
+#include <numeric>
 
 namespace TS
 {
-    const std::string b = " ";
-    int const w = 35;
-    auto print = [](const std::string& c, auto const& v){
+    inline void o(std::string const& t)
+    { std::cout << "\n=== " << t  << "===" << std::endl; }
+
+    inline void newline(void)
+    { std::cout << std::endl; }
+
+    const int w = 35;
+    const std::string  b = " ";
+
+    auto print = [](std::string const& c, const auto& v){
         std::cout << c;
-        for(auto& e : v) {
-            std::cout << std::setw(TS::w) << std::setfill(TS::b) << e << TS::b:
+        for(auto& e : v){
+            std::cout << std::setw(TS::w) << std::setfill(' ') << e << TS::b;
         }
+        TS::newline();
     };
 
-    inline void func(int const& i)
+    inline void func(const int& i)
     {
         std::this_thread::sleep_for(std::chrono::seconds(i));
         std::cout << "thread " << i << " ended" << std::endl;
@@ -44,11 +50,11 @@ namespace TS
     void algo_mover(void);
     void algo_value_modifier(void);
     void algo_set(void);
-    void algo_query_property(void);
     void algo_query_value(void);
+    void algo_query_property(void);
     void algo_raw_memory(void);
     void algo_secret_rune(void);
     void algo_lone_island(void);
 }
 
-#endif
+#endif // ALGO_H_INCLUDED

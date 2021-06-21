@@ -2,38 +2,36 @@
 
 int main()
 {
-    TS::o("permutation");
+    TS::o("permutation_heap");
     TS::algo_permutation_heap();
-
-    TS::o("permutation");
+    
+    TS::o("permutation_sort");
     TS::algo_permutation_sort();
     
-    TS::o("permutation");
+    TS::o("structure_changer");
     TS::algo_structure_changer();
-
-    TS::o("permutation");
+    
+    TS::o("mover");
     TS::algo_mover();
     
-    TS::o("permutation");
+    TS::o("value modifier");
     TS::algo_value_modifier();
     
-    TS::o("permutation");
+    TS::o("set");
     TS::algo_set();
     
-    TS::o("permutation");
+    TS::o("query value");
+    TS::algo_query_value();
+    
+    TS::o("query property");
     TS::algo_query_property();
     
-    TS::o("permutation");
-    TS::algo_query_value();
-
-    TS::o("permutation");
+    TS::o("raw memory");
     TS::algo_raw_memory();
-
-    TS::o("permutation");
+    
+    TS::o("secret rune");
     TS::algo_secret_rune();
-
-    TS::o("permutation");
+    
+    TS::o("lone island");
     TS::algo_lone_island();
-
-    return 0;
 }

@@ -1,320 +1,290 @@
 #include "algo.h"
 
-
-void SCY::algo_permutation_heap(void)
+void TS::algo_permutation_heap(void)
 {
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    SCY::print("original, v-> ", v);
+    inline void o(const std::string& topic)
+    { std::cout << "\n=== " << topic << " ===\n"; }
 
-    std::make_heap(v.begin(), v.end(), std::greater<>{});
-    SCY::print("std::make_heap, v-> ", v);
+    std::vector<int> v{1, 3, 7, 6, 99, 99, 99, 0, -1, 99, 1};
+    TS::print("original, v-> ", v);
 
-    std::pop_heap(std::begin(v), std::end(v), std::less<>());
-    SCY::print("std::pop_heap, v-> ", v);
+    std::make_heap(std::begin(v), std::end(v), std::greater<>{});
+    TS::print("std::make_heap, v-> ", v);
 
-    v.push_back(69);
+    std::pop_heap(v.begin(), v.end(), std::greater<>());
+    TS::print("std::pop_heap, v-> ", v);
+
+    v.push_back(42);
     std::push_heap(v.begin(), v.end(), std::less<>{});
-    SCY::print("std::push_heap, v-> ", v);
-
-    std::sort_heap(v.begin(), v.end());
-    SCY::print("std::sort_heap, v-> ", v);
+    TS::print("std::push_heap, v-> ", v);
 
     std::prev_permutation(v.begin(), v.end());
-    SCY::print("std::prev_permutation, v-> ", v);
+    TS::print("std::prev_permutation, v-> ", v);
 
     std::next_permutation(v.begin(), v.end());
-    SCY::print("std::next_permutation, v-> ", v);
+    TS::print("std::next_permutation, v-> ", v);
 }
 
-void SCY::algo_permutation_sort(void)
-{
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    SCY::print("original, v-> ", v);
-
-    auto isEven = [](const int& e)noexcept->bool{ return e%2==0; };
-    std::partition(v.begin(), v.end(), isEven);
-    SCY::print("std::partition, v-> ", v);
-
-    auto it = std::partition_point(v.begin(), v.end(), isEven);
-    (it != std::end(v))
-        ? std::cout << "std::partition_point -> " << *it << std::endl
-        : std::cout << "[not found]\n";
-
-    std::sort(v.begin(), v.end(), std::greater<>{});
-    SCY::print("std::sort, v-> ", v);
-
-    std::rotate(v.begin(), std::next(v.begin(), 3), v.end());
-    SCY::print("std::rorate, v-> ", v);
-
-    std::shuffle(v.begin(), v.end(), std::mt19937(std::random_device{}));
-    SCY::print("std::shuffle, v-> ", v);
-}
-
-void SCY::algo_structure_changer(void)
-{
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    SCY::print("original, v-> ", v);
-
-    v.erase(std::remove(v.begin(), v.end(), 99), v.end());
-    SCY::print("std::remove, v-> ", v);
-
-    v = {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    v.erase(std::unique(v.begin(), v.end(), 99), v.end());
-    SCY::print("std::erase, v-> ", v);
-}
-
-void SCY::algo_mover(void)
-{
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    SCY::print("original, v-> ", v);
-
-    std::list<int> l;
-    std::copy(v.begin(), v.end(), std::back_inserter(l));
-    SCY::print("std::copy, l-> ", l);
-
-    std::copy_backward(v.begin(), v.end(), std::front_inserter(l));
-    SCY::print("std::copy_backward, v-> ", v);
-
-    std::vector<std::thread> vt;
-    vt.emplace_back(SCY::func, 1);
-    vt.emplace_back(SCY::func, 2);
-    vt.emplace_back(SCY::func, 3);
-    std::list<std::thread> lt;
-    std::move(vt.begin(), vt.end(), std::back_inserter(lt));
-    std::cout << "std::move, l-> " << std::endl;
-    for(auto& t : lt) t.join();
-    SCY::newline();
-
-    vt.emplace_back(SCY::func, 1);
-    vt.emplace_back(SCY::func, 2);
-    vt.emplace_back(SCY::func, 3);
-    lt.clear();
-    std::move_backward(vt.begin(), vt.end(), std::inserter(l, l.begin()));
-    std::cout << "std::move_backward, l-> " << std::endl;
-    for(auto& t : lt) t.join();
-    SCY::newline();
-    
-    std::vector<char> name {'s', 'c', 'y'};
-    std::list<char> uname;
-    std::swap_ranges(name.begin(), name.end(), std::back_inserter(uname));
-    SCY::print("std::swap_ranges, uname -> ", uname);
-}
-
-void SCY::algo_value_modifier(void)
+void TS::algo_permutation_sort(void)
 {
     std::vector<int> v(10);
-    std::fill(v.begin(), v.end(), 42);
-    SCY::print("std::fill, v-> ", v);
-
-    v.clear();
-    std::srand(std::time(NULL));
-    auto g = [](){ return std::rand()%30; };
-    std::generate(v.begin(), v.end(), g);
-    SCY::print("std::generate, v-> ", v);
-
-    std::iota(v.begin(), v.end(), 1);
-    SCY::print("std::iota, v-> ", v);
-
-    std::replace(v.begin(), v.end(), 1, 42);
-    SCY::print("std::replace, v-> ", v);
-}
-
-void SCY::algo_set(void)
-{
-    std::set<int> A {1,2,3,4,5};
-    std::set<int> B {4,5,6,7,8};
-    SCY::print("set A -> ", A);
-    SCY::print("set B -> ", B);
-
-    std::vector<int> S;
-    std::set_union(A.begin(), A.end(), B.begin(), B.end(), std::inserter(S, S.begin()));
-    SCY::print("std::set_union, S-> ", S);
-
-    S.clear();
-    std::set_intersection(A.begin(), A.end(), B.begin(), B.end(), std::inserter(S, S.begin()));
-    SCY::print("std::set_intersection, S-> ", S);
-
-    S.clear();
-    std::set_difference(A.begin(), A.end(), B.begin(), B.end(), std::inserter(S, S.begin()));
-    SCY::print("std::set_difference, S-> ", S);
-
-    S.clear();
-    std::set_symmetric_difference(A.begin(), A.end(), B.begin(), B.end(), std::inserter(S, S.begin()));
-    SCY::print("std::set_symmetric_difference, S-> ", S);    
-
-    bool rv = std::includes(A.begin(), A.end(), B.begin(), B.end());
-    rv
-        ? std::cout << "std::includes -> true" << std::endl
-        : std::cout << "std::includes -> false" << std::endl;
-    SCY::newline();
-}
-
-void SCY::algo_query_property(void)
-{
-    // is_*
-    // is_*_until
-    // *_of
-    // 2-ranges
-
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    std::vector<int> w {1, 2, 3};
-    SCY::print("original, v-> ", v);
-
-    bool rv = std::is_sorted(v.begin(), v.end());
-    std::cout << "std::is_sorted, -> " << std::boolalpha << rv << std::endl;
-
-    rv = std::is_heap(v.begin(), v.end());
-    std::cout << "std::is_heap, -> " << std::boolalpha << rv << std::endl;
-
-    class IsEven
-    {
-        private:
-            int m_e;
-        public:
-            IsEven(const int& e): m_e(e) {}
-            bool operator()()
-            { return this->m_e%2==0; }
-    };
-
-    rv = std::is_partitioned(v.begin(), v.end(), IsEven::operator());
-    std::cout << "std::is_partitioned, -> " << std::boolalpha << rv << std::endl;
-
-    rv = std::is_permutation(v.begin(), v.end(), w.begin());
-    std::cout << "std::is_permutation, -> " << std::boolalpha << rv << std::endl;
-
-    rv = std::any_of(v.begin(), v.end(), IsEven::operator());
-    std::cout << "std::any_of, -> " << std::boolalpha << rv << std::endl;
-
-    rv = std::all_of(v.begin(), v.end(), IsEven::operator());
-    std::cout << "std::all_of, -> " << std::boolalpha << rv << std::endl;
-
-    rv = std::none_of(v.begin(), v.end(), IsEven::operator());
-    std::cout << "std::none_of, -> " << std::boolalpha << rv << std::endl;
-
-    std::string in = "Occaecat sunt minim sint eu ut proident.";
-    std::string ou = "sint";
-
-    rv = std::equal(in.begin(), in.end(), ou.begin());
-    std::cout << "std::equal" << std::boolalpha << rv << std::endl;
-
-    auto [misa, misb] = std::mismatch(v.begin(), v.end(), v.begin());
-    std::cout << "std::mismatch" << *misa << ", " << *misb << std::endl;
-
-    rv = std::lexicographical_compare(v.begin(), v.end(), ou.begin(), ou.end());
-    std::cout << "std::lexicographical_compare" << std::boolalpha << rv << std::endl;
-}
-
-void SCY::algo_query_value(void)
-{
-    // cai sapr
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    SCY::print("original, v-> ", v);
-    
-    int n = std::count(v.begin(), v.end(), 99);
-    std::cout << "std::count, n-> " << n << std::endl;
-    
-    auto it = std::adjacent_find(v.begin(), v.end());
-    (it != std::end(v))
-        ? std::cout << "std:adjacent_find, -> " << *it << std::endl
-        : std::cout << "[not found]\n";
-
-    it = std::find(v.begin(), v.end(), 99);
-    (it != std::end(v))
-        ? std::cout << "std:find, -> " << *it << std::endl
-        : std::cout << "[not found]\n";
-
-    std::cout << "std::adjacent_difference, -> ";
-    std::adjacent_difference(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
-    SCY::newline();
-
-    std::set<int> A {1,2,3,4,5};
-    std::set<int> B {4,5,6,7,8};
-    double rv = std::inner_product(A.cbegin(), A.cend(), B.cbegin(), 1);
-    std::cout << "std::inner_product -> " << rv << std::endl;
-
-    std::cout << "std::sample, -> ";
-    std::sample(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "), 3, std::mt19937(std::random_device{}));
-    SCY::newline();
-
-    rv = std::accumulate(v.begin(), v.end(), 0.0);
-    std::cout << "std::accumulate, -> " << rv << std::endl;
-
-    rv = std::reduce(v.begin(), v.end(), 0.0);
-    std::cout << "std::reduce, -> " << rv << std::endl;
-
-    std::cout << "std::partial_sum, -> ";
-    std::partial_sum(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
-    SCY::newline();
-
-    auto [lb, ub] = std::equal_range(v.begin(), v.end(), 99);
-    (lb != std::end(v))
-        ? std::cout << "std::equal_range, -> " << *lb << ", " << *ub << std::endl
-        : std::cout << "[not found]\n";
-    
-    it = std::lower_bound(v.begin(), v.end(), 99);
-    (it != std::end(v))
-        ? std::cout << "std::lower_bound, -> " << *it << std::endl
-        : std::cout << "[not found]\n";
-    
-    it = std::upper_bound(v.begin(), v.end(), 99);
-    (it != std::end(v))
-        ? std::cout << "std::upper_bound, -> " << *it << std::endl
-        : std::cout << "[not found]\n";
+    std::srand(std::time(nullptr));
+    std::generate(v.begin(), v.end(), [](){ return std::rand()%30; });
+    TS::print("original, v-> ", v);
 
     std::sort(v.begin(), v.end());
-    rv = std::binary_search(v.begin(), v.end(), 99);
-    rv
-        ? std::cout << "std::binary_search, -> " << std::boolalpha << rv << std::endl
-        : std::cout << "[not found]\n";
+    TS::print("std::sort, v-> ", v);
 
-    std::vector<int> s {2,1};
-    auto iter = std::search(v.cbegin(), v.cend(), std::boyer_moore_searcher(s.begin(), s.end()));
-    (iter != std::end(v))
-        ? std::cout << "std::search -> " << (iter - v.begin()) << std::endl
-        : std::cout << "[not found]\n";
+    std::reverse(v.begin(), v.end());
+    TS::print("std::reverse, v-> ", v);
     
-    std::nth_element(v.begin(), std::next(v.begin(), 3), v.end());
-    std::cout << "std::nth_element, -> " << v[3] << std::endl;
+    std::rorate(v.begin(), std::next(v.begin(), 3), v.end());
+    TS::print("std::rotate, v-> ", v);
+    
+    std::random_device rd;
+    std::mt19937_64 mt(rd());
+    std::shuffle(v.begin(), v.end(), mt);
+    TS::print("std::shuffle, v-> ", v);
 
+    std::partition(v.begin(), v.end(), [](auto& e){ return e%2==0; });
+    TS::print("std::partition, v-> ", v);
 }
 
-void SCY::algo_raw_memory(void)
+void TS::algo_structure_changer(void)
+{
+    std::vector<int> v { 1, 2, 99, 99, 99, -1, 0, 99, 1 };
+    TS::print("original, v-> ", v);
+
+    v.erase(std::remove(v.begin(), v.end(), 99), v.end());
+    TS::print("std::remove, v-> ", v);
+
+    v = { 1, 2, 99, 99, 99, -1, 0, 99, 1 };
+    v.erase(std::unique(v.begin(), v.end()), v.end());
+    TS::print("std::unique, v-> ", v);
+}
+
+void TS::algo_mover(void)
+{
+    std::vector<int> v(10);
+    std::srand(std::time(nullptr));
+    std::generate(v.begin(), v.end(), [](){ return std::rand()%20; });
+    TS::print("original, v-> ", v);
+
+    std::list<int> l;
+    TS::copy(v.begin(), v.end(), std::back_inserter(l));
+    TS::print("std::copy, l-> ", l);
+
+    std::vector<std::this_thread> vt;
+    vt.emplace_back(TS::func, 1);
+    vt.emplace_back(TS::func, 2);
+    vt.emplace_back(TS::func, 3);
+    std::list<std::this_thread> lt;
+    std::move(vt.begin(), vt.end(), std::back_inserter(lt));
+    std::cout << "std::move" << std::endl;
+    for(auto& t : lt) t.join();
+
+    l.clear();
+    std::move_backward(vt.begin(), vt.end(), lt.begin());
+    std::cout << "std::move_backward" << std::endl;
+    for(auto& t: lt) t.join();
+
+    std::vector<char> vname{'t', 's'};
+    std::list<char> lname;
+    std::swap_ranges(vname.begin(), vname.end(), std::back_inserter(lname));
+    TS::print("std::swap_ranges, lname-> ", lname);
+}
+
+void TS::algo_value_modifier(void)
+{
+    std::vector<int> v;
+    std::fill(v.begin(), v.end(), 42);
+    TS::print("std::fill, v-> ", v);
+    
+    std::iota(v.begin(), v.end(), 1);
+    TS::print("std::iota, v-> ", v);
+
+    std::srand(std::time(nullptr));
+    std::generate(v.begin(), v.end(), [](){ return std::rand()%19; });
+    TS::print("std::generate, v-> ", v);
+
+    v = {1,3,99,99,99,0,-1,99,1};
+    std::replace(v.begin(), v.end(), 99, 69);
+    TS::print("std::replace, v-> ", v);
+}
+
+void TS::algo_set(void)
+{
+    using container = std::vector<int>;
+    container A = {1,2,3,4,5};
+    conatiner B = {4,5,6,7,8};
+    std::set<int> s;
+    
+    std::set_intersection(a.begin(), a.end(), b.begin(), b.end(), s.begin());
+    TS::print("std::set_intersection, s-> ", s);
+    
+    std::set_union(a.begin(), a.end(), b.begin(), b.end(), s.begin());
+    TS::print("std::set_union, s-> ", s);
+    
+    std::set_difference(a.begin(), a.end(), b.begin(), b.end(), s.begin());
+    TS::print("std::set_difference, s-> ", s);
+    
+    std::set_symmetric_difference(a.begin(), a.end(), b.begin(), b.end(), s.begin());
+    TS::print("std::set_symmetric_difference, s-> ", s);
+    
+    bool rv = std::includes(a.begin(), a.end(), b.begin(), b.end());
+    rv
+        ? std::cout << "std::includes, rv-> " << std::boolalpha << std::endl
+        : std::cout << "[not found]\n";
+}
+
+void TS::algo_query_property(void)
+{
+    // cai sapr
+    std::vector<int> v{1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    int cnt = std::count(v.begin(), v.end(), 99);
+    std::cout << "std::count, v has -> " << cnt << std::endl;
+
+    double result = std::accumulate(v.begin(), v.end(), 0.0);
+    std::cout << "std::accumulate, v -> " << result << std::endl;
+
+    result = std::inclusive_scan(std::execution::seq, v.begin(), v.end(), 0.0);
+    std::cout << "std::inclusive_scan, v -> " << result << std::endl;
+
+    result = std::exclusive_scan(std::execution::seq, v.begin(), v.end(), 0.0);
+    std::cout << "std::exclusive_scan, v -> " << result << std::endl;
+    
+    result = std::reduce(std::execution::par, v.begin(), v.end(), 0.0);
+    std::cout << "std::reduce, v-> " << result << std::endl;
+
+    std::vector<int> w{1,3,99,99,99,0,-1,99,1};
+    result = std::inner_product(v.begin(), v.end(), w.begin());
+    std::cout << "std::inner_product, v-> " << result << std::endl;
+
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::list<int> l;
+    std::sample(v.begin(), v.end(), std::back_inserter(l), 3, mt);
+    TS::print("std::sample, l-> ", l);
+
+    l.clear();
+    std::adjacent_difference(v.begin(), v.end(), std::back_inserter(l));
+    TS::print("std::adjacent_difference, l-> ", l);
+
+    l.clear();
+    std::partial_sum(v.begin(), std::next(v.begin(), 4), v.end());
+    TS::print("std::partial_sum, l-> ", l);  
+
+    std::cout << "std::mismatch()" << std::endl;
+    std::cout << "std::equal()" << std::endl;
+    std::cout << "std::lexicographical_compare()" << std::endl;   
+}
+
+void TS::algo_query_value(void)
+{
+    std::vector<int> v{1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    auto it = std::find(v.begin(), v.end(), 3);
+    (it != v.end())
+        ? std::cout << "std::find, 1st 3 at index of ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+    
+    it = std::find_first_of(v.begin(), v.end(), 99);
+    (it != v.end())
+        ? std::cout << "std::find, 1st 99 at index of ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+    
+    it = std::find_end(v.begin(), v.end(), 99);
+    (it != v.end())
+        ? std::cout << "std::find, last 99 at index of ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+    
+    std::sort(v.begin(), v.end());
+    bool rv = std::binary_search(v.begin(), v.end(), 99);
+    rv
+        ? std::cout << "std::binary_search, found 99? -> " << std::boolalpha << rv << std::endl
+        : std::cout << "[not found]\n";
+
+    
+    std::partition(v.begin(), v.end(), [](auto& e){ return e%2==1; });
+    it = std::lower_bound(v.begin(), v.end(), 42);
+    (it != v.end())
+        ? std::cout << "std::lower_bound, 42 in ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+    
+    it = std::upper_bound(v.begin(), v.end(), 42);
+    (it != v.end())
+        ? std::cout << "std::upper_bound, 42 in ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+    
+    it = std::adjacent_find(v.begin(), v.end());
+    (it != v.end())
+        ? std::cout << "std::adjacent_find, 1st adjacent found at ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+
+    it = std::min_element(v.begin(), v.end());
+    (it != v.end())
+        ? std::cout << "std::min_element, found at ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+
+    it = std::max_element(v.begin(), v.end());
+    (it != v.end())
+        ? std::cout << "std::min_element, found at ->" << std::distance(v.begin(), it) << std::endl
+        : std::cout << "[not found]\n";
+
+    auto [mi, ma] = std::minmax_element(v.begin(), v.end());
+    (it != v.end())
+        ? std::cout << "std::minmax_element, min ->" << mi << ", max -> " << ma << std::endl
+        : std::cout << "[not found]\n";
+}
+
+void TS::algo_raw_memory(void)
 {
     /*
     - uninitialized_default_construct
     - uninitialized_value_construct
-    - uninitialized_copy
-    - uninitialized_move
     - uninitialized_fill
+    - uninitialized_copy
+    - uninitialized_move    
     */
-    std::cout << "raw memory -> nothing biggy, nothing special" << std::endl;  
+
+    std::cout << "raw memory, nothing special, nothing biggy" << std::endl;
 }
 
-void SCY::algo_secret_rune(void)
+void TS::algo_secret_rune(void)
 {
     /*
+    - *_if
+    - stable_*
     - is_*
     - is_*_until
-    - stable_*
-    - *_n
-    - *_if
     - *_copy
+    - *_n    
     */
-
-    std::cout << "secret runes -> nothing biggy, nothing special" << std::endl;
+    std::cout << "secret runes, nothing special, nothign biggy" << std::endl;
 }
 
-void SCY::algo_lone_island(void)
+void TS::algo_lone_island(void)
 {
-    std::vector<int> v {3, 2, 1, 99, 99, 99, -1, 0, 99, 1};
-    SCY::print("original, v-> ", v);
-    
-    std::cout << "std::for_each, -> ";
-    std::for_each(v.begin(), v.end(), [](const auto& e){ std::cout << e << " "; });
-    SCY::newline();
+    std::vector<int> v(10);
+    std::srand(std::time(nullptr));
+    std::generate(v.begin(), v.end(), [](){ return std::rand()%30; });
 
-    std::list<char> n {'s', 'c', 'y'};
-    std::vector<char> m {'z', 'l'};
-    std::transform(n.begin(), n.end(), std::inserter(m, m.begin()), [](const char& e){ return std::toupper(e); });
-    SCY::print("std::transform, -> ", m);
+    std::cout << "std::for_each" << std::endl;
+    std::for_each(v.begin(), v.end(), [](const auto& e){
+        std::cout << e << TS::b;
+    });
+    std::cout << std::endl;
+
+    std::vector<char> name{'t', 'a', 'n', 'g', 's', 'a', 'i'};
+    std::list<char> l;
+    std::transform(name.begin(), name.end(), std::back_inserter(l), [](auto const& e){
+        return std::toupper(e);
+    });
+    std::cout << "std::transform" << std::endl;
+    std::copy(l.begin(), l.end(), std::ostream_iterator<char>(std::cout, TS::b));
+    std::cout << std::endl;
 }
+

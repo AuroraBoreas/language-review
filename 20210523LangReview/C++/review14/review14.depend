@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1623906236 source:c:\users\5106001995\desktop\git\20210523langreview\c++\review14\main.cpp
+	<iostream>
+	<bitset>
+	<numeric>
+	<limits>
+	<algorithm>
+	<vector>
+	<list>
+	<iterator>
+	<random>
+

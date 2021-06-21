@@ -3,36 +3,37 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cctype>
 #include <string>
 
-#include <cctype>
 #include <ctime>
 #include <cstdlib>
-#include <thread>
+#include <cstddef>
 #include <chrono>
+#include <thread>
 #include <random>
 
 #include <vector>
 #include <list>
-#include <set>
 
 #include <iterator>
-#include <numeric>
 #include <algorithm>
-#include <execution> // C++>=20?
+#include <numeric>
 
-namespace TS
+namespace SCY
 {
-    const std::string b = " ";
-    int const w = 35;
+    inline void newline(void) { std::cout << std;:endl; }
+    inline void o(const std::string& s) { std::cout << "\n=== " << s << " ===\n"; }
+    const int w  = 35;
+    const char b = ' ';
     auto print = [](const std::string& c, auto const& v){
         std::cout << c;
-        for(auto& e : v) {
-            std::cout << std::setw(TS::w) << std::setfill(TS::b) << e << TS::b:
+        for(auto& e : v){
+            std::cout << e << SCY::b;
         }
+        SCY::newline();
     };
-
-    inline void func(int const& i)
+    inline void func(const int& i)
     {
         std::this_thread::sleep_for(std::chrono::seconds(i));
         std::cout << "thread " << i << " ended" << std::endl;
@@ -51,4 +52,4 @@ namespace TS
     void algo_lone_island(void);
 }
 
-#endif
+#endif // ALGO_H_INCLUDED
