@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1627456200 source:c:\users\5106001995\desktop\git\20210523langreview\c++\eei\main.cpp
+	<iostream>
+	"eei.h"
+
+1627459173 c:\users\5106001995\desktop\git\20210523langreview\c++\eei\eei.h
+	<cmath>
+

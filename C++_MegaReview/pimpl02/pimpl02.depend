@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1627518255 source:c:\users\5106001995\desktop\git\20210523langreview\c++\pimpl02\main.cpp
+	<iostream>
+	"employee.h"
+
+1627517818 c:\users\5106001995\desktop\git\20210523langreview\c++\pimpl02\employee.h
+	<iostream>
+	<memory>
+
+1627519347 source:c:\users\5106001995\desktop\git\20210523langreview\c++\pimpl02\employee.cpp
+	"employee.h"
+

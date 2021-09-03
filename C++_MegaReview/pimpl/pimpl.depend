@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1627517403 source:c:\users\5106001995\desktop\git\20210523langreview\c++\pimpl\employee.cpp
+	"employee.h"
+
+1627517340 c:\users\5106001995\desktop\git\20210523langreview\c++\pimpl\employee.h
+	<string>
+	<iostream>
+
