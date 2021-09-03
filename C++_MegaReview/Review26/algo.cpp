@@ -1,0 +1,313 @@
+#include "algo.h"
+
+void TS::algo_permutation_heap(void)
+{
+    // make heap pop
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    std::make_heap(v.begin(), v.end(), std::greater<>{});
+    TS::print("std::make_heap, v-> ", v);
+
+    std::pop_heap(v.begin(), v.end(), std::less<>());
+    TS::print("std::pop_heap, v-> ", v);
+
+    v.push_back(42);
+    std::push_heap(v.begin(), v.end());
+    TS::print("std::push_heap, v-> ", v);
+
+    std::sort_heap(v.begin(), v.end());
+    TS::print("std::sort_heap, v-> ", v);
+
+    std::prev_permutation(v.begin(), v.end());
+    TS::print("std::prev_permutation, v-> ", v);
+
+    std::next_permutation(v.begin(), v.end());
+    TS::print("std::next_permutation, v-> ", v);
+}
+
+void TS::algo_permutation_sort(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    // psr
+    std::partition(v.begin(), v.end(), [](const auto& e){ return e%2==0; });
+    TS::print("std::partition, v-> ", v);
+
+    auto it = std::partition_point(v.begin(), v.end(), TS::IsEven());
+    TS::oformat("std::partition_point, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    std::partial_sort(v.begin(), v.begin()+3, v.end());
+    TS::print("std::partial_sort, v-> ", v);
+
+    std::sort(v.begin(), v.end());
+    TS::print("std::sort, v-> ", v);
+
+    std::random_device rd;
+    std::mt19937 mt{rd()};
+    std::shuffle(v.begin(), v.end(), mt);
+    TS::print("std::shuffle, v-> ", v);
+
+    std::rotate(v.begin(), std::next(v.begin(), 3), std::end(v));
+    TS::print("std::rotate, v-> ", v);
+
+    std::reverse(v.begin(), v.end());
+    TS::print("std::reverse, v-> ", v);
+}
+
+void TS::algo_structure_changer(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    const int x(99);
+    v.erase(std::remove(v.begin(), v.end(), x), v.end());
+    TS::print("std::remove, v-> ", v);
+
+    v = {2,1,3,99,99,99,0,-1,99,1};
+    v.erase(std::unique(v.begin(), v.end()), v.end());
+    TS::print("std::unique, v-> ", v);
+}
+
+void TS::algo_mover(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    // c m s
+    TS::oformat("std::copy, v-> ");
+    std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+    TS::newline();
+
+    std::vector<int> u(10);
+    std::copy_backward(v.begin(), v.end(), u.end());
+    TS::print("std::copy_backward, u-> ", u);
+
+    std::vector<std::thread> vt;
+    vt.emplace_back(TS::func, 1);
+    vt.emplace_back(TS::func, 2);
+    vt.emplace_back(TS::func, 3);
+    std::list<std::thread> lt;
+    std::move(vt.begin(), vt.end(), std::back_inserter(lt));
+    TS::oformat("std::move, v-> \n");
+    for(auto& t : lt) t.join();
+
+    using container =  std::vector<std::string>;
+    container m{"hello", "world"}, n{"zhang", "liang"};
+    TS::print("original, m-> ", m);
+    TS::print("original, n-> ", n);
+    std::move_backward(m.begin(), m.end(), n.end());
+    TS::print("std::move_backward, m-> ", m);
+    TS::print("std::move_backward, n-> ", n);
+
+    m = {"hello", "world"}; n = {"zhang", "liang"};
+    std::swap_ranges(m.begin(), m.end(), n.begin());
+    TS::print("std::swap_ranges, m-> ", m);
+    TS::print("std::swap_ranges, n-> ", n);
+}
+
+void TS::algo_value_modifier(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    // f i g r
+    const int beg{1};
+
+    std::fill(v.begin(), v.end(), beg);
+    TS::print("std::fill, v-> ", v);
+
+    std::iota(v.begin(), v.end(), beg);
+    TS::print("std::iota, v-> ", v);
+
+    std::replace(v.begin(), v.end(), 1, 42);
+    TS::print("std::replace, v-> ", v);
+
+    std::srand(std::time(NULL));
+    std::generate(v.begin(), v.end(), [](){ return std::rand()%30; });
+    TS::print("std::generate, v-> ", v);
+}
+
+void TS::algo_set(void)
+{
+    using container = std::set<int>;
+    container A {1,2,3,4,5,5};
+    container B {4,5,6,7,8,8};
+    TS::print("std::set, A-> ", A);
+    TS::print("std::set, B-> ", B);
+
+    std::vector<int> S;
+    std::set_union(A.begin(), A.end(), B.begin(), B.end(), std::back_inserter(S));
+    TS::print("std::set_union, S-> ", S);
+
+    S.clear();
+    std::set_intersection(A.begin(), A.end(), B.begin(), B.end(), std::back_inserter(S));
+    TS::print("std::set_intersection, S-> ", S);
+
+    S.clear();
+    std::merge(A.begin(), A.end(), B.begin(), B.end(), std::back_inserter(S));
+    TS::print("std::merge, S-> ", S);
+
+    S.clear();
+    std::set_difference(A.begin(), A.end(), B.begin(), B.end(), std::back_inserter(S));
+    TS::print("std::set_difference, S-> ", S);
+
+    S.clear();
+    std::set_symmetric_difference(A.begin(), A.end(), B.begin(), B.end(), std::back_inserter(S));
+    TS::print("std::set_symmetric_difference, S-> ", S);
+
+    bool rv = std::includes(A.begin(), A.end(), B.begin(), B.end());
+    TS::oformat("std::includes, v-> ");
+    std::cout << std::boolalpha << rv << std::endl;
+}
+
+void TS::algo_query_property(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    // *_elment
+    std::nth_element(v.begin(), v.begin() + 3, v.end());
+    TS::print("std::nth_element, v-> ", v);
+
+    auto [mi, ma] = std::minmax_element(v.begin(), v.end());
+    TS::oformat("std::minmax_element, min|max-> ");
+    (mi != std::end(v) && ma != std::end(v))
+        ? std::cout << *mi << ", " << *ma << std::endl
+        : std::cout << "[not found]\n";
+
+    const int x{42};
+    // *_bound
+    auto it = std::lower_bound(v.begin(), v.end(), x);
+    TS::oformat("std::lower_bound, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    it = std::upper_bound(v.begin(), v.end(), x);
+    TS::oformat("std::upper_bound, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    // f: unsorted
+    it = std::find(v.begin(), v.end(), -1);
+    TS::oformat("std::find, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    std::string m{"hello zhang liang"};
+    std::string n{"zhang"};
+    auto iter = std::find_end(n.begin(), n.end(), m.begin(), m.end());
+    TS::oformat("std:find_end, iter-> ");
+    (iter != std::end(m))
+        ? std::cout << *iter << std::endl
+        : std::cout << "[not found]\n";
+
+    iter = std::find_first_of(n.begin(), n.end(), m.begin(), m.end());
+    TS::oformat("std::find_first_of, iter-> ");
+    (iter != std::end(m))
+        ? std::cout << *iter << std::endl
+        : std::cout << "[not found]\n";
+
+    // s: sorted
+    std::sort(v.begin(), v.end());
+    std::vector<int> u{3,99};
+    it = std::search(u.begin(), u.end(), v.begin(), v.end());
+    TS::oformat("std::search, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    it = std::search_n(v.begin(), v.end(), 1, 99);
+    TS::oformat("std:search_n, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    bool rv = std::binary_search(v.begin(), v.end(), 99);
+    TS::oformat("std::binary_search, rv-> ");
+    std::cout << std::boolalpha << rv << std::endl;
+
+    // *_scan
+
+    // equal
+    // mismatch
+    // lexicographic_compare
+    m = "hello zhang liang"; n = "zhang";
+    rv = std::equal(n.begin(), n.end(), m.begin(), m.end());
+    TS::oformat("std::equal, rv-> ");
+    std::cout << std::boolalpha << rv << std::endl;
+
+    auto [s, e] = std::mismatch(n.begin(), n.end(), m.begin());
+    TS::oformat("std::mismatch, pair-> ");
+    (s != std::end(m) && e != std::end(n))
+        ? std::cout << *s << ", " << *e << std::endl
+        : std::cout << "[not found]\n";
+
+    rv = std::lexicographical_compare(n.begin(), n.end(), m.begin(), m.end());
+    TS::oformat("std::lexicographic_compare, rv-> ");
+    std::cout << std::boolalpha << rv << std::endl;
+}
+
+void TS::algo_query_value(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    // cai sapr
+    const int x(99);
+    int cnt = std::count(v.begin(), v.end(), x);
+    TS::oformat("std::count, cnt-> ");
+    std::cout << cnt << std::endl;
+
+    double rv = std::accumulate(v.begin(), v.end(), 0.0);
+    TS::oformat("std::accumulate, rv-> ");
+    std::cout << rv << std::endl;
+}
+
+void TS::algo_raw_memory(void)
+{
+    /*
+    - uninitialized_default_construct
+    - uninitialized_value_construct
+    - uninitialized_fill
+    - uninitialized_move
+    - uninitialized_copy
+    */
+    TS::oformat("std::raw_momery -> nothing biggy\n");
+}
+
+void TS::algo_secret_rune(void)
+{
+    /*
+    - *_if
+    - stable_*
+    - *_n
+    - is_*, is_*_until
+    - *_copy
+    */
+    TS::oformat("std::secret_runes -> nothing special\n");
+}
+
+void TS::algo_lone_island(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1};
+    TS::print("original, v-> ", v);
+
+    // f t
+    TS::oformat("std::for_each, v-> ");
+    std::for_each(v.begin(), v.end(), [](const auto& e){ std::cout << e << " "; });
+    TS::newline();
+
+    std::string m("hello zhang liang");
+    std::string n;
+    TS::print("original, m-> ", m);
+    std::transform(m.begin(), m.end(), std::back_inserter(n), [](const char& e){ return std::toupper(e); });
+    TS::print("std::transform, n-> ", n);
+}
