@@ -1,0 +1,2 @@
+01stdout.bat
+bare.txt

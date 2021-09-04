@@ -1,0 +1,15 @@
+01stdout.bat
+02stderr.bat
+03stdin.bat
+bare.txt
+out2.txt
+stdout.txt
+01stdout.bat
+02stderr.bat
+03stdin.bat
+bare.txt
+out2.txt
+stdout.txt
+y 
+y 
+hello world! 

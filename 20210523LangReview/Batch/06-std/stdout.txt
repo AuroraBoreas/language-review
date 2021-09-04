@@ -1,0 +1,8 @@
+01stdout.bat
+02stderr.bat
+bare.txt
+stdout.txt
+01stdout.bat
+02stderr.bat
+bare.txt
+stdout.txt
