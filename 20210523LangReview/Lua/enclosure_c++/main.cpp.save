@@ -1,0 +1,18 @@
+#include <iostream>
+#include <functional>
+
+std::function<int (int)> getInt(void);
+
+int main()
+{
+    std::function<int (void)> g = getInt();
+    std::cout << g() << std::endl;
+
+    return 0;
+}
+
+std::function(void (int)) getInt(void)
+{
+    int i(0);
+    return [](){ return i++; };
+}
