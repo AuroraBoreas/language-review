@@ -3,7 +3,7 @@ function getInt() {
     return ()=>{ return ++i; };
 };
 
-let g = getInt()
+let g = getInt();
 for(let i=0; i<5; ++i) {
     console.log(g())
 }

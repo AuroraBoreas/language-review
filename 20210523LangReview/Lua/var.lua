@@ -13,6 +13,7 @@
 -- @ keyword: let; var;
 
 var = {}
+
 var.name = "zhang liang"
 var.sex = 'male'
 var.age = 80
@@ -22,3 +23,5 @@ var.longstr = [[
     Excepteur sint non cillum dolor occaecat dolore.
     Irure consectetur ea amet Lorem sint cillum Lorem cillum Lorem aute ullamco irure do.
 ]]
+
+return var

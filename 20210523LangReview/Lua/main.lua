@@ -1,4 +1,5 @@
 local lib = require('lib')
+
 print("hello world!")
 
 print("\n=== variable demo ===")
