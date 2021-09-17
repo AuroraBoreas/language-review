@@ -1,0 +1,11 @@
+local lib = require("Lua.20210917Review.lib")
+
+lib.var_demo()
+lib.func_demo()
+lib.statement_demo()
+lib.controlflow_demo()
+lib.loop_demo()
+lib.class_demo()
+lib.metatable_demo()
+lib.fileio_demo()
+lib.coroutine_demo()
