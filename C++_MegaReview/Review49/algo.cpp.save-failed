@@ -1,0 +1,151 @@
+#include "algo.h"
+
+void TS::algo_permutation_heap(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// make heap pop sort
+    std::make_heap(v.begin(), v.end(), std::greater<>{});
+    TS::print("std::make_heap, v-> ", v);
+
+    std::sort_heap(v.begin(), v.end(), std::less<>());
+    TS::print("std::sort_heap, v-> ", v);
+
+    std::pop_heap(v.begin(), v.end());
+    TS::print("std::pop_heap, v-> ", v);
+
+    v.push_back(42);
+    std::push_heap(v.begin(), v.end());
+    TS::print("std::push_heap, v-> ", v);
+
+    std::prev_permutation(v.begin(), v.end());
+    TS::print("std::prev_permutation, v-> ", v);
+
+    std::next_permutation(v.begin(), v.end());
+    TS::print("std::next_permutation, v-> ", v);
+};
+
+void TS::algo_permutation_sort(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// psr
+    std::partition(v.begin(), v.end(), [](auto const& e)->bool{ return e%2==0; });
+    TS::print("std::partition, v-> ", v);
+
+    auto it = std::partition_point(v.begin(), v.end(), TS::IsEven());
+    TS::oformat("std::partition_point, it-> ");
+    (it != std::end(v))
+        ? std::cout << *it << std::endl
+        : std::cout << "[not found]\n";
+
+    std::partial_sort(v.begin(), v.begn()+3, v.end());
+    TS::print("std::partial_sort, v-> ", v);
+
+    std::sort(v.begin(), v.end());
+    TS::print("std::sort, v-> ", v);
+
+    std::random_device rd;
+    std::mt19937 g{rd()};
+    std::shuffle(v.begin(), v.end(), g);
+    TS::print("std::shuffle, v-> ", v);
+
+    std::reverse(v.begin(), v.end());
+    TS::print("std::reverse, v-> ", v);
+
+    std::rotate(v.begin(), std::next(std::begin(v), 3), v.end());
+    TS::print("std::rotate, v-> ", v);
+};
+
+void TS::algo_structure_changer(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// ru
+    v.erase(std::remove(v.begin(), v.end(), 99), v.end());
+    TS::print("std::remove, v-> ", v);
+
+    v = {2,1,3,99,99,99,0,-1,99,1 };
+    v.erase(std::unique(v.begin(), v.end()), v.end());
+    TS::print("std::unique, v-> ", v);
+};
+
+void TS::algo_mover(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// cms
+};
+
+void TS::algo_value_modifier(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// figr
+};
+
+void TS::algo_set(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// umids
+};
+
+void TS::algo_query_property(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// sebfs lem
+};
+
+void TS::algo_query_value(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// cai sapr
+};
+
+void TS::algo_raw_memory(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /** raw_memory
+     * uninitialized_default_construct
+     * uninitialized_value_construct
+     * uninitialized_fill
+     * uninitialized_copy
+     * uninitialized_move
+    */
+};
+
+void TS::algo_secret_rune(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /** secret_rune
+     * *_if;
+     * stable_*;
+     * *_n;
+     * *_is; *_is_until;
+     * *_copy;
+    */
+};
+
+void TS::algo_lone_island(void)
+{
+    std::vector<int> v{2,1,3,99,99,99,0,-1,99,1 };
+    TS::print("original, v-> ", v);
+
+    /// ft
+};
+
